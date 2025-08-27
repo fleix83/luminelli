@@ -1,0 +1,19 @@
+# LUMINELLI Simple Security Configuration
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "\.(ini|log|sh|inc|bak|sql)$">
+    Deny from all
+</FilesMatch>
+
+# Protect config files from direct access
+<Files "config.php">
+    Deny from all
+</Files>
+
+# File upload settings for development
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
+php_value max_execution_time 300

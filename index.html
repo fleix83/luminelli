@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMINELLI Gallery</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="LUMINELLI - An elegant, minimalistic online gallery showcasing images and videos in immersive fullscreen presentation.">
+    <meta name="keywords" content="gallery, photography, video, art, portfolio, fullscreen">
+    <meta name="author" content="LUMINELLI">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="LUMINELLI Gallery">
+    <meta property="og:description" content="An elegant, minimalistic online gallery showcasing images and videos in immersive fullscreen presentation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LUMINELLI Gallery">
+    <meta name="twitter:description" content="An elegant, minimalistic online gallery showcasing images and videos in immersive fullscreen presentation.">
+    <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/gallery.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="api/sections.php" as="fetch" crossorigin>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">LUMINELLI</div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading gallery...</div>
+        </div>
+    </div>
+
+    <!-- Error Screen -->
+    <div id="error-screen" class="error-screen" style="display: none;">
+        <div class="error-content">
+            <div class="error-icon">⚠️</div>
+            <h2>Unable to Load Gallery</h2>
+            <p id="error-message">Something went wrong. Please try again.</p>
+            <button id="btn-retry" class="btn-retry">Retry</button>
+        </div>
+    </div>
+
+    <!-- Empty Gallery Screen -->
+    <div id="empty-screen" class="empty-screen" style="display: none;">
+        <div class="empty-content">
+            <div class="empty-icon">📸</div>
+            <h2>Gallery Coming Soon</h2>
+            <p>No content available at the moment.</p>
+        </div>
+    </div>
+
+    <!-- Tag Filter (Hidden by default) -->
+    <div id="tag-filter" class="tag-filter" style="display: none;">
+        <div class="filter-toggle">
+            <button id="btn-filter-toggle" class="filter-toggle-btn" title="Filter by tags">🏷️</button>
+        </div>
+        <div id="filter-dropdown" class="filter-dropdown">
+            <div class="filter-header">
+                <span>Filter by Tags</span>
+                <button id="btn-clear-filter" class="btn-clear">Clear All</button>
+            </div>
+            <div id="tag-list" class="tag-list">
+                <!-- Tags will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Hints -->
+    <div id="nav-hints" class="nav-hints">
+        <div class="nav-hint nav-hint-scroll">
+            <div class="scroll-icon">↓</div>
+            <span>Scroll to explore</span>
+        </div>
+        <div class="nav-hint nav-hint-keyboard" style="display: none;">
+            <span>Use ← → arrow keys to navigate</span>
+        </div>
+    </div>
+
+    <!-- Gallery Container -->
+    <main id="gallery" class="gallery" style="display: none;">
+        <!-- Gallery sections will be inserted here dynamically -->
+    </main>
+
+    <!-- Section Progress Indicator -->
+    <div id="progress-indicator" class="progress-indicator" style="display: none;">
+        <div class="progress-dots">
+            <!-- Dots will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Admin Access (Hidden) -->
+    <div class="admin-access">
+        <a href="admin.html" class="admin-link" title="Admin Panel">⚙️</a>
+    </div>
+
+    <!-- Noscript Fallback -->
+    <noscript>
+        <div class="noscript-message">
+            <h2>JavaScript Required</h2>
+            <p>This gallery requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
+        </div>
+    </noscript>
+
+    <!-- Scripts -->
+    <script src="js/gallery.js"></script>
+    
+    <!-- Analytics (Optional) -->
+    <!-- Add your analytics code here -->
+</body>
+</html>

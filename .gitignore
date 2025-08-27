@@ -1,0 +1,25 @@
+# Uploads folder (user content)
+uploads/
+
+# Configuration with credentials
+api/config.php
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Backup files
+*.bak
+*.backup
+
+# Temporary files
+*.tmp
