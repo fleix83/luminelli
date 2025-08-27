@@ -267,6 +267,41 @@ body {
   cursor: grab;
 }
 
+/* Drag Handle */
+.drag-handle {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  width: 24px;
+  height: 60px;
+  background: var(--gray-200);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  opacity: 0.6;
+  transition: all var(--transition-fast);
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.drag-handle:hover {
+  opacity: 1;
+  background: var(--gray-300);
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  background: var(--accent);
+  color: var(--black);
+}
+
+.drag-handle::before {
+  content: "⋮⋮";
+  line-height: 0.8;
+}
+
 .section-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   transform: translateY(-2px);
@@ -281,6 +316,11 @@ body {
 .section-card.drag-over {
   border-color: var(--accent);
   box-shadow: 0 0 0 2px rgba(245, 202, 106, 0.2);
+}
+
+.drag-preview {
+  border: 2px solid var(--accent);
+  z-index: 10000;
 }
 
 .card-thumbnail {
@@ -788,6 +828,43 @@ input:checked + .toggle-slider:before {
 
   .sections-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Mobile drag improvements */
+  .section-card {
+    padding: var(--space-md);
+  }
+
+  .drag-handle {
+    width: 40px;
+    height: 80px;
+    right: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    background: var(--accent);
+    color: var(--black);
+    opacity: 0.8;
+  }
+
+  .drag-handle:hover,
+  .drag-handle:active {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .card-actions {
+    flex-direction: column;
+    position: absolute;
+    top: var(--space-md);
+    right: calc(var(--space-md) + 50px);
+    gap: var(--space-xs);
+  }
+
+  .btn-icon-small {
+    padding: var(--space-sm);
+    font-size: var(--text-base);
   }
 
   .radio-group {
@@ -798,9 +875,18 @@ input:checked + .toggle-slider:before {
     grid-template-columns: 1fr;
   }
 
+  /* Fullscreen modal on mobile */
   .modal {
-    margin: var(--space-md);
-    max-height: calc(100vh - 32px);
+    margin: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .modal-content {
+    height: calc(100vh - 140px);
+    overflow-y: auto;
   }
 
   .confirm-actions {

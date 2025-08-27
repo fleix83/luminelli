@@ -199,6 +199,7 @@ function createSectionCard(section) {
     const tags = Array.isArray(section.tags) ? section.tags.join(', ') : '';
     
     card.innerHTML = `
+        <div class="drag-handle" title="Drag to reorder"></div>
         <img src="${thumbnailUrl}" alt="${section.internal_name}" class="card-thumbnail">
         <div class="card-content">
             <div class="card-info">
@@ -611,6 +612,25 @@ function initializeDragAndDrop() {
     const cards = document.querySelectorAll('.section-card');
     
     cards.forEach(card => {
+        const dragHandle = card.querySelector('.drag-handle');
+        
+        // Make only the drag handle initiate drag on mobile
+        if (dragHandle) {
+            // Touch events for mobile
+            dragHandle.addEventListener('touchstart', handleTouchStart, { passive: false });
+            dragHandle.addEventListener('touchmove', handleTouchMove, { passive: false });
+            dragHandle.addEventListener('touchend', handleTouchEnd, { passive: false });
+            
+            // Mouse events for desktop
+            dragHandle.addEventListener('mousedown', () => {
+                card.setAttribute('draggable', 'true');
+            });
+            
+            dragHandle.addEventListener('mouseup', () => {
+                setTimeout(() => card.setAttribute('draggable', 'false'), 100);
+            });
+        }
+        
         card.addEventListener('dragstart', handleDragStart);
         card.addEventListener('dragover', handleDragOverCard);
         card.addEventListener('drop', handleDropCard);
@@ -677,6 +697,122 @@ function handleDragEnd(e) {
     
     draggedElement = null;
     dragOverElement = null;
+}
+
+// Touch-based drag and drop for mobile
+let touchDraggedElement = null;
+let touchStartY = 0;
+let touchCurrentY = 0;
+let dragPreview = null;
+
+function handleTouchStart(e) {
+    e.preventDefault();
+    
+    const card = e.target.closest('.section-card');
+    if (!card) return;
+    
+    touchDraggedElement = card;
+    const touch = e.touches[0];
+    touchStartY = touch.clientY;
+    touchCurrentY = touch.clientY;
+    
+    // Create drag preview
+    createDragPreview(card, touch);
+    
+    // Add visual feedback
+    card.style.opacity = '0.5';
+    card.classList.add('dragging');
+}
+
+function handleTouchMove(e) {
+    if (!touchDraggedElement || !dragPreview) return;
+    
+    e.preventDefault();
+    const touch = e.touches[0];
+    touchCurrentY = touch.clientY;
+    
+    // Move the preview
+    dragPreview.style.left = touch.clientX - (dragPreview.offsetWidth / 2) + 'px';
+    dragPreview.style.top = touch.clientY - (dragPreview.offsetHeight / 2) + 'px';
+    
+    // Find the element we're hovering over
+    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+    const cardBelow = elementBelow?.closest('.section-card');
+    
+    // Remove previous hover states
+    document.querySelectorAll('.section-card.drag-over').forEach(el => {
+        el.classList.remove('drag-over');
+    });
+    
+    // Add hover state to target
+    if (cardBelow && cardBelow !== touchDraggedElement) {
+        cardBelow.classList.add('drag-over');
+        dragOverElement = cardBelow;
+    }
+}
+
+async function handleTouchEnd(e) {
+    e.preventDefault();
+    
+    if (!touchDraggedElement) return;
+    
+    // Clean up preview
+    if (dragPreview) {
+        dragPreview.remove();
+        dragPreview = null;
+    }
+    
+    // Restore original card
+    touchDraggedElement.style.opacity = '1';
+    touchDraggedElement.classList.remove('dragging');
+    
+    // Clean up hover states
+    document.querySelectorAll('.section-card.drag-over').forEach(el => {
+        el.classList.remove('drag-over');
+    });
+    
+    // Perform the swap if we have a target
+    if (dragOverElement && dragOverElement !== touchDraggedElement) {
+        try {
+            const draggedId = parseInt(touchDraggedElement.dataset.sectionId);
+            const targetId = parseInt(dragOverElement.dataset.sectionId);
+            
+            await apiRequest('reorder.php', {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'swap_positions',
+                    section1_id: draggedId,
+                    section2_id: targetId
+                })
+            });
+            
+            showToast('Sections reordered successfully', 'success');
+            loadSections();
+            
+        } catch (error) {
+            showToast('Failed to reorder sections: ' + error.message, 'error');
+        }
+    }
+    
+    // Clean up
+    touchDraggedElement = null;
+    dragOverElement = null;
+}
+
+function createDragPreview(card, touch) {
+    dragPreview = card.cloneNode(true);
+    dragPreview.classList.add('drag-preview');
+    dragPreview.style.position = 'fixed';
+    dragPreview.style.left = touch.clientX - (card.offsetWidth / 2) + 'px';
+    dragPreview.style.top = touch.clientY - (card.offsetHeight / 2) + 'px';
+    dragPreview.style.width = card.offsetWidth + 'px';
+    dragPreview.style.zIndex = '10000';
+    dragPreview.style.opacity = '0.8';
+    dragPreview.style.transform = 'rotate(5deg) scale(1.05)';
+    dragPreview.style.pointerEvents = 'none';
+    dragPreview.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+    
+    document.body.appendChild(dragPreview);
 }
 
 // Delete Section
