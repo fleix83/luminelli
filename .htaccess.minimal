@@ -1,0 +1,6 @@
+# Minimal .htaccess for shared hosting compatibility
+
+# Only essential security rules
+<Files "config.php">
+    Deny from all
+</Files>
