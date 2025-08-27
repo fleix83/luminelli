@@ -1,8 +1,9 @@
 # Uploads folder (user content)
 uploads/
 
-# Configuration with credentials
+# Configuration with credentials (sensitive data)
 api/config.php
+config.php
 
 # System files
 .DS_Store
