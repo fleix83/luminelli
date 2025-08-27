@@ -1,5 +1,15 @@
-# Uploads folder (user content)
-uploads/
+# Uploads folder (user content) - keep structure but ignore files
+uploads/*
+!uploads/.gitkeep
+!uploads/images/
+!uploads/videos/
+!uploads/thumbnails/
+uploads/images/*
+!uploads/images/.gitkeep
+uploads/videos/*
+!uploads/videos/.gitkeep  
+uploads/thumbnails/*
+!uploads/thumbnails/.gitkeep
 
 # Configuration with credentials (sensitive data)
 api/config.php
