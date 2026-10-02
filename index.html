@@ -12,9 +12,9 @@
   <meta name="author" content="Felix Weissheimer">
 
   <link rel="preload" href="assets/fonts/quicksand-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" type="image/avif" media="(max-width: 719.98px)" href="assets/img/hero-portrait-804.avif" imagesrcset="assets/img/hero-portrait-600.avif 600w, assets/img/hero-portrait-804.avif 804w" imagesizes="100vw" fetchpriority="high">
-  <link rel="preload" as="image" type="image/avif" media="(min-width: 720px)" href="assets/img/hero-wide-804.avif" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/styles.css?v=1">
+  <link rel="preload" as="image" type="image/avif" media="(max-width: 719.98px)" href="assets/img/hero-portrait-900.avif" imagesrcset="assets/img/hero-portrait-600.avif 600w, assets/img/hero-portrait-900.avif 900w, assets/img/hero-portrait-1200.avif 1200w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(min-width: 720px)" href="assets/img/hero-wide-1848.avif" imagesrcset="assets/img/hero-wide-1200.avif 1200w, assets/img/hero-wide-1848.avif 1848w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/styles.css?v=3">
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -36,7 +36,7 @@
   <meta name="twitter:description" content="Webapps, Mobile Apps, Webhosting und Support aus Basel.">
   <meta name="twitter:image" content="https://luminelli.ch/assets/img/og-image.jpg">
 
-  <script type="module" src="assets/js/main.js?v=1"></script>
+  <script type="module" src="assets/js/main.js?v=2"></script>
 
   <script type="application/ld+json">
   {
@@ -113,7 +113,7 @@
         "inLanguage": "de-CH",
         "isPartOf": { "@id": "https://luminelli.ch/#website" },
         "about": { "@id": "https://luminelli.ch/#organization" },
-        "primaryImageOfPage": "https://luminelli.ch/assets/img/hero-wide-804.jpg"
+        "primaryImageOfPage": "https://luminelli.ch/assets/img/hero-wide-1848.jpg"
       },
       {
         "@type": "OfferCatalog",
@@ -224,28 +224,25 @@
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
       <picture class="hero__media">
-        <source media="(min-width: 720px)" type="image/avif" srcset="assets/img/hero-wide-804.avif" width="804" height="503">
-        <source media="(min-width: 720px)" type="image/webp" srcset="assets/img/hero-wide-804.webp" width="804" height="503">
-        <source media="(min-width: 720px)" srcset="assets/img/hero-wide-804.jpg" width="804" height="503">
-        <source type="image/avif" srcset="assets/img/hero-portrait-600.avif 600w, assets/img/hero-portrait-804.avif 804w" sizes="100vw">
-        <source type="image/webp" srcset="assets/img/hero-portrait-600.webp 600w, assets/img/hero-portrait-804.webp 804w" sizes="100vw">
-        <!-- Original: docs/luminelli_hero_bg.jpg. Mobil = Hochformat, ab 720px = Querformat-Ausschnitt (siehe README) -->
-        <img src="assets/img/hero-portrait-804.jpg" srcset="assets/img/hero-portrait-600.jpg 600w, assets/img/hero-portrait-804.jpg 804w" sizes="100vw"
-             width="804" height="1570" alt="Regennasse Gasse in der Basler Altstadt mit historischen Häusern und grünen Fensterläden" fetchpriority="high" decoding="async">
+        <source media="(min-width: 720px)" type="image/avif" srcset="assets/img/hero-wide-1200.avif 1200w, assets/img/hero-wide-1848.avif 1848w" sizes="100vw" width="1848" height="1300">
+        <source media="(min-width: 720px)" type="image/webp" srcset="assets/img/hero-wide-1200.webp 1200w, assets/img/hero-wide-1848.webp 1848w" sizes="100vw" width="1848" height="1300">
+        <source media="(min-width: 720px)" srcset="assets/img/hero-wide-1200.jpg 1200w, assets/img/hero-wide-1848.jpg 1848w" sizes="100vw" width="1848" height="1300">
+        <source type="image/avif" srcset="assets/img/hero-portrait-600.avif 600w, assets/img/hero-portrait-900.avif 900w, assets/img/hero-portrait-1200.avif 1200w" sizes="100vw">
+        <source type="image/webp" srcset="assets/img/hero-portrait-600.webp 600w, assets/img/hero-portrait-900.webp 900w, assets/img/hero-portrait-1200.webp 1200w" sizes="100vw">
+        <!-- Original: docs/20260110_092036.jpg. Mobil = Hochformat, ab 720px = Querformat-Ausschnitt (siehe README) -->
+        <img src="assets/img/hero-portrait-900.jpg" srcset="assets/img/hero-portrait-600.jpg 600w, assets/img/hero-portrait-900.jpg 900w, assets/img/hero-portrait-1200.jpg 1200w" sizes="100vw"
+             width="900" height="1680" alt="Regennasse Gasse in der Basler Altstadt mit historischen Häusern und grünen Fensterläden" fetchpriority="high" decoding="async">
       </picture>
       <div class="hero__inner container">
-        <h1 class="hero__kicker" id="hero-title">Studio Luminelli: Webapps &amp; Mobile Apps aus Basel</h1>
-        <p class="hero__statement">
+        <h1 class="hero__statement" id="hero-title">
           <span>Raum für Ihre Ideen.</span>
           <span>Zeit für Ihre Bedürfnisse.</span>
           <span>Flexibilität für Ihr Budget.</span>
-        </p>
+        </h1>
         <a class="btn hero__cta" href="#kontakt" data-inquiry-topic="">Anfragen</a>
         <p class="hero__visit">Oder kommen Sie direkt am <a href="https://www.openstreetmap.org/?mlat=47.55483&amp;mlon=7.59281#map=19/47.55483/7.59281" rel="noopener" target="_blank">Luftgässlein&nbsp;3 in Basel<span class="visually-hidden"> (Karte, öffnet in neuem Tab)</span></a> vorbei</p>
       </div>
     </section>
-
-    <svg class="starburst" viewBox="-24 -24 48 48" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width=".9" stroke-linecap="round" d="M5 0L23 0M4.6 1.9L14.8 6.1M3.5 3.5L16.3 16.3M1.9 4.6L7.3 17.6M0 5L0 23M-1.9 4.6L-6.1 14.8M-3.5 3.5L-16.3 16.3M-4.6 1.9L-17.6 7.3M-5 0L-23 0M-4.6-1.9L-14.8-6.1M-3.5-3.5L-16.3-16.3M-1.9-4.6L-7.3-17.6M0-5L0-23M1.9-4.6L6.1-14.8M3.5-3.5L16.3-16.3M4.6-1.9L17.6-7.3"/></svg>
 
     <div class="container">
       <section class="intro reveal" aria-label="Unser Ansatz">

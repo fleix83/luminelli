@@ -71,24 +71,15 @@ printf "%s" "document.documentElement.classList.add('js')" | openssl dgst -sha25
 
 ## Hero photo
 
-Source: `docs/luminelli_hero_bg.jpg` (804×1570, portrait). Art direction in `index.html`:
+Source: `docs/20260110_092036.jpg` (1848×4000 after EXIF rotation). Art direction in `index.html`:
 
-- below 720 px: `hero-portrait-600|804.{avif,webp,jpg}`, the full portrait photo (bottom part softened,
-  it sits under the nearly opaque overlay anyway, which saves bytes)
-- from 720 px: `hero-wide-804.{avif,webp,jpg}`, a 16:10 crop around the houses
+- below 720 px: `hero-portrait-600|900|1200.{avif,webp,jpg}`, the portrait photo with the top 550 px
+  of sky trimmed; the bottom is softened because it sits under the nearly opaque overlay (saves bytes)
+- from 720 px: `hero-wide-1200|1848.{avif,webp,jpg}`, a 1848×1300 crop around the houses (y 950–2250)
 
-The wide variant is only 804 px wide and gets upscaled on large screens. For a sharper desktop hero,
-provide a landscape photo with at least 2000 px width and regenerate `hero-wide-*`:
-
-```sh
-cd assets/img
-# crop/resize to e.g. 1600x1000 → hero-wide-1600.jpg, then:
-cwebp -q 65 hero-wide-1600.jpg -o hero-wide-1600.webp
-avifenc -q 40 hero-wide-1600.jpg hero-wide-1600.avif
-```
-
-and update the `<source media="(min-width: 720px)">` tags and the preload in `index.html`
-(width/height attributes included). Re-encoded files contain no EXIF/GPS data; keep it that way.
+Encoding: `avifenc -q 42`, `cwebp -q 66`, JPEG quality ~72. Re-encoded files contain no EXIF/GPS data.
+Keep the originals in `docs/` (not deployed). If you change the crops, update the `width`/`height`
+attributes and both `<link rel="preload">` tags in `index.html`.
 
 ## Keeping facts consistent (SEO/GEO)
 
