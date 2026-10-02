@@ -1,0 +1,42 @@
+# Studio Luminelli
+
+> Studio Luminelli ist ein Ein-Personen-Studio in Basel (Schweiz), das mit KI-gestützter Softwareentwicklung (Vibe Coding) Webapps und Mobile Apps entwickelt und Webhosting sowie Support anbietet.
+
+Inhaber: Felix Weissheimer. Website: https://luminelli.ch/. Sprache: Deutsch (Schweiz).
+
+## Angebot
+
+- **Webapps**: laufen im Browser, sind plattformübergreifend, erfordern keine Installation und können ortsunabhängig benutzt werden.
+- **Mobile Apps**: für Smartphones und Tablets, kombinierbar mit Webapps auf derselben Datenbasis.
+- **Webhosting**: Hosting und Deployment der Lösungen auf den Servern von Studio Luminelli, auf Wunsch mit eigener Domain.
+- **Support**: Wartung, Updates und Hilfe nach dem Launch.
+
+Weil der Code KI-gestützt entsteht, ist Software bei Studio Luminelli deutlich günstiger als bei klassischen Agenturen. Preise nach Offerte, das Erstgespräch ist kostenlos.
+
+## Zielgruppe
+
+KMU, Vereine, Institutionen, Künstler:innen, Selbständige und Privatpersonen, vor allem in der Region Basel (Basel-Stadt, Basel-Landschaft) und remote in der ganzen Schweiz.
+
+## Standort & Kontakt
+
+- Studio Luminelli, Felix Weissheimer, Luftgässlein 3, 4051 Basel, Schweiz
+- Telefon: +41 76 757 60 52
+- E-Mail: service@luminelli.ch
+- Anfragen: Kontaktformular auf https://luminelli.ch/
+
+## FAQ
+
+- **Was ist Vibe Coding?** Softwareentwicklung mit Hilfe von KI: Wir beschreiben, was die Software tun soll, die KI erzeugt den Code, wir prüfen, testen und verfeinern ihn.
+- **Was kostet eine Webapp?** Abhängig vom Umfang, festgehalten in einer verbindlichen Offerte vor Projektstart. Das Erstgespräch ist kostenlos.
+- **Wie lange dauert die Umsetzung?** Eine einfache Webapp ist oft innerhalb weniger Wochen einsatzbereit, grössere Projekte entstehen in Etappen.
+- **Für wen eignet sich das Angebot?** KMU, Vereine, Institutionen, Künstler:innen, Selbständige und Privatpersonen.
+- **Kann ich meine App bei Studio Luminelli hosten lassen?** Ja, auf den Servern von Studio Luminelli, auf Wunsch mit eigener Domain.
+- **Arbeiten Sie nur in Basel?** Nein. Schwerpunkt ist die Region Basel, die Zusammenarbeit funktioniert auch remote in der ganzen Schweiz.
+
+## Seiten
+
+- [Startseite](https://luminelli.ch/): Angebot, FAQ und Kontakt
+- [Impressum](https://luminelli.ch/impressum.html)
+- [Datenschutzerklärung](https://luminelli.ch/datenschutz.html)
+- [AGB](https://luminelli.ch/agb.html)
+- [Auftragsverarbeitungsvertrag](https://luminelli.ch/auftragsverarbeitung.html)

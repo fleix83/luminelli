@@ -1,0 +1,14 @@
+# Secrets
+api/config.php
+.env*
+
+# Runtime data (mail log in DEV mode, rate-limit files)
+api/storage/*
+!api/storage/.htaccess
+!api/storage/.gitkeep
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/

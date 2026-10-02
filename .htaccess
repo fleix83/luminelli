@@ -1,0 +1,80 @@
+# Studio Luminelli – Apache configuration
+# Canonical origin: https://luminelli.ch (HTTPS, no www)
+
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+AddType image/avif .avif
+AddType application/manifest+json .webmanifest
+AddType text/markdown .md
+
+# ---------- Custom 404 (absolute URL-path: correct at the domain root;
+# under http://localhost/luminelli/ Apache cannot find it, which is fine locally)
+ErrorDocument 404 /404.html
+
+# ---------- Redirects: HTTPS + non-www (only for the real domain, not localhost)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTP_HOST} ^www\.luminelli\.ch$ [NC]
+  RewriteRule ^ https://luminelli.ch%{REQUEST_URI} [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^luminelli\.ch$ [NC]
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://luminelli.ch%{REQUEST_URI} [R=301,L]
+
+  # /index.html -> / (domain only)
+  RewriteCond %{HTTP_HOST} ^luminelli\.ch$ [NC]
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /%1 [R=301,L,NE]
+
+  # Block internal files and folders (return 404, don't reveal they exist)
+  RewriteRule (^|/)\. - [R=404,L]
+  RewriteRule ^(docs|api/storage|api/lib)(/|$) - [R=404,L]
+  RewriteRule ^api/config(\.example)?\.php$ - [R=404,L]
+  RewriteRule \.(md|log|sql|bak|ini|sh|lock|json\.dist)$ - [R=404,L]
+</IfModule>
+
+# Fallback if mod_rewrite is unavailable
+<FilesMatch "^(config\.php|config\.example\.php|.*\.log|.*\.md|\.env.*|\.git.*)$">
+  Require all denied
+</FilesMatch>
+
+# ---------- Compression
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml text/markdown application/javascript text/javascript application/json application/ld+json application/manifest+json application/xml image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml text/markdown application/javascript text/javascript application/json application/ld+json application/manifest+json application/xml image/svg+xml
+</IfModule>
+
+# ---------- Caching
+<IfModule mod_headers.c>
+  # HTML, txt, xml: always revalidate
+  <FilesMatch "\.(html|txt|xml|webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # CSS/JS are versioned via ?v=N, fonts never change: 1 year
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Images may be replaced under the same name (hero, logo): 30 days
+  <FilesMatch "\.(avif|webp|jpe?g|png|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+# ---------- Security headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "DENY"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()"
+  # The sha256 hash allows the one inline script that sets the "js" class.
+  # If you change that script, recompute the hash (see README).
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+  Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
+  Header unset X-Powered-By
+</IfModule>
