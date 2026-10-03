@@ -24,6 +24,7 @@ $out = [
     'ok' => true,
     'state' => $job['state'],
     'project' => $job['project'],
+    'has_email' => ($job['email'] ?? '') !== '',
     'started_at' => $job['started_at'] ?? null,
     'finished_at' => $job['finished_at'] ?? null,
     'activity' => $job['state'] === 'running' ? ($job['activity'] ?? []) : [],

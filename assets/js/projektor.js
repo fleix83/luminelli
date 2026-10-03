@@ -24,13 +24,6 @@ const COLORS = [
 const MAX_FILES = 8;
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
 const MAX_TOTAL_BYTES = 25 * 1024 * 1024;
-const ERRORS = {
-  link: 'Dieser Bestätigungslink ist ungültig. Bitte füllen Sie den Projektor erneut aus.',
-  abgelaufen: 'Dieser Bestätigungslink ist abgelaufen. Bitte füllen Sie den Projektor erneut aus.',
-  limit: 'Pro Tag ist ein Entwurf möglich, und für heute sind die Plätze aufgebraucht. Bitte versuchen Sie es morgen wieder.',
-  pause: 'Der Projektor macht gerade eine Pause. Bitte versuchen Sie es später erneut.',
-  busy: 'Der Projektor ist gerade beschäftigt. Bitte klicken Sie den Link in der E-Mail nochmals.',
-};
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -243,7 +236,7 @@ function validate(form) {
   const description = v('description');
   if (description.length < 30) errors.description = `Bitte beschreiben Sie etwas ausführlicher, was Sie umsetzen möchten (noch ${30 - description.length} Zeichen).`;
   const email = v('email');
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein oder lassen Sie das Feld leer.';
   if (!form.elements.consent.checked) errors.consent = 'Bitte bestätigen Sie den Hinweis zur Datenverarbeitung.';
   const total = state.files.reduce((n, f) => n + f.size, 0) + (state.screenshot?.size ?? 0);
   if (total > MAX_TOTAL_BYTES) errors.files = 'Die Dateien sind zusammen zu gross (max. 25 MB).';
@@ -292,7 +285,7 @@ function initForm() {
     const button = form.querySelector('.pj-submit');
     button.disabled = true;
     button.setAttribute('aria-busy', 'true');
-    button.textContent = 'Wird gesendet';
+    button.textContent = 'Projektor startet';
     try {
       const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       const body = await res.json().catch(() => ({}));
@@ -300,8 +293,9 @@ function initForm() {
         if (body.fields) showErrors(body.fields);
         throw new Error(body.error || 'Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.');
       }
-      $('pj-sent-email').textContent = form.elements.email.value.trim();
-      showView('pj-sent');
+      // Session is running: switch to the live view (and make the URL bookmarkable).
+      history.pushState(null, '', `projektor.html?job=${encodeURIComponent(body.job)}&t=${encodeURIComponent(body.t)}`);
+      initStatus(body.job, body.t);
     } catch (err) {
       $('pj-submit-error').textContent = err instanceof TypeError
         ? 'Keine Verbindung zum Server. Bitte prüfen Sie Ihre Internetverbindung.'
@@ -332,6 +326,7 @@ function initStatus(jobId, token) {
 
   const render = (data) => {
     $('pj-status-project').textContent = data.project || '';
+    if (data.has_email) $('pj-leave-hint').textContent = 'Sie können diese Seite schliessen: Wir senden Ihnen den Link per E-Mail, sobald der Entwurf fertig ist.';
     if (data.started_at) startedAt = Date.parse(data.started_at);
     if (data.state === 'running') {
       const lines = data.activity?.length ? data.activity : ['Liest Ihre Angaben'];
@@ -406,12 +401,13 @@ function initStatus(jobId, token) {
 
 /* ---------- Init ---------- */
 
+// Back button after the switch to the live view: show the matching state again.
+window.addEventListener('popstate', () => location.reload());
+
 const params = new URLSearchParams(location.search);
 if (params.get('job') && params.get('t')) {
   initForm(); // keep the form usable if the user navigates back
   initStatus(params.get('job'), params.get('t'));
 } else {
   initForm();
-  const code = params.get('fehler');
-  if (code) showPageError(ERRORS[code] || ERRORS.link);
 }

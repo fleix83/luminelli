@@ -89,14 +89,15 @@ the agent loop and a sandbox container; this server only starts jobs and collect
 
 ### Flow
 
-1. `api/projektor/submit.php` validates the form, stores the request in `api/storage/projektor/jobs/<id>/`
-   and mails a confirmation link (honeypot, 5 s time trap, max 3 submits per IP and hour).
-2. `api/projektor/confirm.php` (link in the mail) consumes a daily slot (1 per e-mail, 1 per IP,
-   `daily_global_cap` in total), uploads the files, starts a session with a **hard budget**
-   (`budget_cents`, default $3) and redirects to the status view `projektor.html?job=…&t=…`.
-3. The agent (system prompt: `api/projektor/prompt/system.md`) builds the draft in its sandbox and
+1. `api/projektor/submit.php` validates the form, checks the daily caps (1 per IP, `daily_global_cap` in
+   total; max 3 submits per IP and hour; honeypot, 5 s time trap), uploads the files, starts a session
+   with a **hard budget** (`budget_cents`, default $3) and returns the status URL; the page switches to
+   the live view `projektor.html?job=…&t=…`. No e-mail confirmation; the e-mail address is optional and
+   only used to send the link when the draft is ready. If the start fails, the slots are given back.
+   Every endpoint also runs housekeeping in the background (no cron job needed).
+2. The agent (system prompt: `api/projektor/prompt/system.md`) builds the draft in its sandbox and
    leaves `build.zip` + `report.json` as session outputs.
-4. `webhook.php` (Anthropic calls it when the session is idle) and `status.php` (while the customer
+3. `webhook.php` (Anthropic calls it when the session is idle) and `status.php` (while the customer
    watches) check the session. When it is idle,
    `lib/Finalizer.php` unpacks the zip (whitelisted file types, no hidden files, no PHP, max 15 MB)
    to `drafts_dir/<random slug>/`, mails the link to the customer and a summary (incl. cost and the
@@ -111,7 +112,7 @@ the agent loop and a sandbox container; this server only starts jobs and collect
    `http://localhost` from its `frame-ancestors` on the server.
 3. **Config** in `api/config.php` → `projektor`: `anthropic_api_key`, `site_url` (`https://luminelli.ch`),
    `drafts_dir` (absolute path of the subdomain docroot), `drafts_url` (`https://entwurf.luminelli.ch`).
-   Mail must work (`dev_mode => false`), confirmation mails are essential.
+   Mail must work (`dev_mode => false`; on this host `'transport' => 'mail'`).
 4. **Agent:** `php api/projektor/setup.php` (once; again after editing the prompt, model or effort, which
    creates a new agent version). Then set `'enabled' => true`.
 5. **Webhook** (no cron job needed): Anthropic Console → **Manage → Webhooks → Add endpoint**

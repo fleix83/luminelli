@@ -2,14 +2,15 @@
 declare(strict_types=1);
 
 /**
- * Projektor: shared setup for the endpoints (submit, confirm, status) and the
+ * Projektor: shared setup for the endpoints (submit, status, webhook) and the
  * CLI scripts (setup, cron).
  *
- * Flow: submit.php stores a job and mails a confirmation link → confirm.php
- * checks the daily caps and starts a Managed Agents session → webhook.php
- * (called by Anthropic when the session is idle) or status.php (while the
- * customer watches) let Finalizer download the build into the drafts folder
- * and mail the link. Housekeeping piggybacks on these requests (no cron).
+ * Flow: submit.php checks the daily caps (per IP, global), stores the job and
+ * starts a Managed Agents session right away → webhook.php (called by
+ * Anthropic when the session is idle) or status.php (while the visitor
+ * watches) let Finalizer download the build into the drafts folder and mail
+ * the link (if an e-mail was given). Housekeeping piggybacks on these
+ * requests (no cron).
  */
 
 require_once __DIR__ . '/../../../vendor/autoload.php';

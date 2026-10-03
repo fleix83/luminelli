@@ -2,8 +2,9 @@
 declare(strict_types=1);
 
 /**
- * POST (multipart) from projektor.html. Validates the request, stores the
- * uploads and mails a confirmation link. Nothing is sent to Anthropic yet.
+ * POST (multipart) from projektor.html. Validates the request, checks the
+ * daily caps (per IP and global), stores the uploads and starts the Managed
+ * Agents session right away. Returns the status URL for the live view.
  */
 
 require __DIR__ . '/lib/bootstrap.php';
@@ -26,7 +27,7 @@ if (empty($_POST) && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
 
 // Honeypot + time trap (form rendered → submit must take at least 5 s)
 if (trim((string) ($_POST['website'] ?? '')) !== '') {
-    pj_json(['ok' => true, 'state' => 'pending']);
+    pj_json(['ok' => true]); // pretend success, start nothing
 }
 $ts = (string) ($_POST['ts'] ?? '');
 if (!ctype_digit($ts) || (microtime(true) * 1000 - (float) $ts) < 5000) {
@@ -62,9 +63,9 @@ $color = strtolower($in('color'));
 if (!preg_match('/^#[0-9a-f]{6}$/', $color)) {
     $errors['color'] = 'Bitte wählen Sie eine Farbe.';
 }
-$email = $in('email');
-if ($email === '' || strlen($email) > 254 || filter_var($email, FILTER_VALIDATE_EMAIL) === false || preg_match('/[\r\n]/', $email)) {
-    $errors['email'] = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+$email = $in('email'); // optional: only to send the link when the draft is ready
+if ($email !== '' && (strlen($email) > 254 || filter_var($email, FILTER_VALIDATE_EMAIL) === false || preg_match('/[\r\n]/', $email))) {
+    $errors['email'] = 'Bitte geben Sie eine gültige E-Mail-Adresse ein oder lassen Sie das Feld leer.';
 }
 if (($_POST['consent'] ?? '') !== '1') {
     $errors['consent'] = 'Bitte bestätigen Sie den Hinweis zur Datenverarbeitung.';
@@ -150,9 +151,9 @@ $ip = client_ip();
 if (!rate_limit_allows('pj-submit:' . $ip, $pj['_root'], 'projektor-submits', (int) ($pj['submits_per_ip_per_hour'] ?? 3), 3600)) {
     pj_json(['ok' => false, 'error' => 'Sie haben in kurzer Zeit mehrere Anfragen gesendet. Bitte versuchen Sie es später erneut.'], 429);
 }
-// Early check (not consumed yet) so nobody waits for a mail that leads nowhere.
 $ipHash = hash_id('ip:' . $ip, $pj['_root']);
-if ($limitError = pj_limits_check($pj, $email, $ipHash, false)) {
+if ($limitError = pj_limits_check($pj, $ipHash, true)) {
+    rate_limit_release('pj-submit:' . $ip, $pj['_root'], 'projektor-submits');
     pj_json(['ok' => false, 'error' => $limitError], 429);
 }
 
@@ -170,34 +171,30 @@ foreach ($uploads as $u) {
     move_uploaded_file($u['tmp'], pj_job_dir($job['id']) . '/uploads/' . $u['name']);
     $job['files'][] = ['name' => $u['name'], 'stored' => $u['name'], 'mime' => $u['mime'], 'size' => $u['size'], 'role' => $u['role']];
 }
-pj_job_save($job);
 
-$confirmUrl = rtrim((string) $pj['site_url'], '/') . '/api/projektor/confirm.php?id=' . $job['id'] . '&t=' . $job['confirm_token'];
-$sent = send_plain_mail([
-    'to' => $email,
-    'reply_to' => (string) $pj['_root']['to'],
-    'subject' => 'Bitte bestätigen: Ihr Entwurf im Projektor',
-    'tag' => 'projektor',
-    'body' => implode("\n", [
-        'Guten Tag',
-        '',
-        'Sie haben im Projektor von Studio Luminelli einen Entwurf angefragt:',
-        '«' . $project . '»',
-        '',
-        'Bitte bestätigen Sie Ihre E-Mail-Adresse, dann beginnt der Projektor sofort mit der Arbeit:',
-        $confirmUrl,
-        '',
-        'Der Link ist 24 Stunden gültig. Haben Sie nichts angefragt? Dann ignorieren Sie diese E-Mail einfach; Ihre Angaben werden automatisch gelöscht.',
-        '',
-        'Freundliche Grüsse',
-        'Studio Luminelli',
-    ]),
-], $pj['_root']);
-
-if (!$sent) {
-    rate_limit_release('pj-submit:' . $ip, $pj['_root'], 'projektor-submits'); // our failure doesn't count
-    pj_rmdir(pj_job_dir($job['id']));
-    pj_json(['ok' => false, 'error' => 'Wir konnten Ihnen keine Bestätigungs-E-Mail senden. Bitte prüfen Sie die Adresse oder versuchen Sie es später erneut.'], 500);
+try {
+    pj_start_session($pj, $job);
+    @mkdir(PJ_DIR . '/sessions', 0750, true);
+    file_put_contents(pj_session_index_file($job['session_id']), $job['id']);
+    $job['state'] = 'running';
+    $job['started_at'] = pj_now()->format(DATE_ATOM);
+    $job['last_poll'] = time();
+} catch (Throwable $e) {
+    app_log('[projektor] start ' . $job['id'] . ': ' . get_class($e) . ': ' . $e->getMessage());
+    // Our failure: give the slots back so the visitor can try again.
+    pj_limits_release($pj, $ipHash);
+    rate_limit_release('pj-submit:' . $ip, $pj['_root'], 'projektor-submits');
+    pj_fail($pj, $job, 'Start fehlgeschlagen: ' . $e->getMessage());
+    pj_json(['ok' => false, 'error' => 'Der Projektor konnte gerade nicht starten. Bitte versuchen Sie es in ein paar Minuten erneut.'], 502);
 }
 
-pj_json(['ok' => true, 'state' => 'pending']);
+$statusToken = pj_job_issue_status_token($job);
+pj_job_save($job);
+
+pj_json([
+    'ok' => true,
+    'state' => 'running',
+    'job' => $job['id'],
+    't' => $statusToken,
+    'status_url' => pj_status_url($pj, $job['id'], $statusToken),
+]);

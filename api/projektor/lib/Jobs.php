@@ -4,9 +4,7 @@ declare(strict_types=1);
 /**
  * File-based job store: storage/projektor/jobs/<id>/job.json + uploads/.
  *
- * States: pending (waiting for e-mail confirmation) → running → done | failed,
- * plus expired (never confirmed) and rejected (daily cap reached on confirm).
- * Tokens are stored as SHA-256 hashes only.
+ * States: running → done | failed. Status tokens are stored as SHA-256 hashes only.
  */
 
 function pj_jobs_dir(): string
@@ -27,16 +25,14 @@ function pj_valid_id(string $id): bool
 function pj_job_create(array $data): array
 {
     $id = bin2hex(random_bytes(10));
-    $confirmToken = bin2hex(random_bytes(16));
     $dir = pj_job_dir($id);
     if (!mkdir($dir . '/uploads', 0750, true)) {
         throw new RuntimeException('Could not create job directory');
     }
     $job = $data + [
         'id' => $id,
-        'state' => 'pending',
+        'state' => 'new',
         'created_at' => pj_now()->format(DATE_ATOM),
-        'confirm_hash' => hash('sha256', $confirmToken),
         'status_hashes' => [],
         'session_id' => null,
         'draft_slug' => null,
@@ -44,8 +40,6 @@ function pj_job_create(array $data): array
         'error' => null,
     ];
     pj_job_save($job);
-    // The plain token is returned once (for the mail link) and never stored.
-    $job['confirm_token'] = $confirmToken;
     return $job;
 }
 
@@ -64,7 +58,6 @@ function pj_job_load(string $id): ?array
 
 function pj_job_save(array $job): void
 {
-    unset($job['confirm_token'], $job['status_token']);
     $job['updated_at'] = pj_now()->format(DATE_ATOM);
     $file = pj_job_dir($job['id']) . '/job.json';
     $tmp = $file . '.tmp';
@@ -72,13 +65,7 @@ function pj_job_save(array $job): void
     rename($tmp, $file);
 }
 
-function pj_job_confirm_ok(array $job, string $token): bool
-{
-    $hash = $job['confirm_hash'] ?? '';
-    return $hash !== '' && hash_equals($hash, hash('sha256', $token));
-}
-
-/** Status tokens are issued on confirmation (one per confirming browser, max 5). */
+/** Status token for the live view (issued when the session starts; max 5 kept). */
 function pj_job_issue_status_token(array &$job): string
 {
     $token = bin2hex(random_bytes(16));

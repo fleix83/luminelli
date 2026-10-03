@@ -216,7 +216,7 @@ function pj_mail_done(array $pj, array $job): void
     $title = ($r['title'] ?? '') !== '' ? $r['title'] : $job['project'];
     $url = pj_draft_url($pj, $job);
 
-    send_plain_mail([
+    if ($job['email'] !== '') send_plain_mail([
         'to' => $job['email'],
         'reply_to' => (string) $root['to'],
         'subject' => 'Ihr Entwurf ist fertig: ' . $title,
@@ -243,7 +243,7 @@ function pj_mail_done(array $pj, array $job): void
 
     send_plain_mail([
         'to' => (string) $pj['notify_to'],
-        'reply_to' => $job['email'],
+        'reply_to' => $job['email'] !== '' ? $job['email'] : null,
         'subject' => 'Projektor: Entwurf fertig – ' . $title,
         'tag' => 'projektor',
         'body' => pj_internal_summary($pj, $job, $url),
@@ -253,7 +253,7 @@ function pj_mail_done(array $pj, array $job): void
 function pj_mail_failed(array $pj, array $job): void
 {
     $root = $pj['_root'];
-    send_plain_mail([
+    if ($job['email'] !== '') send_plain_mail([
         'to' => $job['email'],
         'reply_to' => (string) $root['to'],
         'subject' => 'Ihr Projektor-Entwurf: leider nicht geklappt',
@@ -262,7 +262,7 @@ function pj_mail_failed(array $pj, array $job): void
             'Guten Tag',
             '',
             'Beim Bauen Ihres Entwurfs ist leider etwas schiefgelaufen. Das liegt nicht an Ihnen.',
-            'Wir haben Ihre Angaben erhalten und melden uns persönlich bei Ihnen.',
+            'Wir schauen uns das an und melden uns persönlich bei Ihnen.',
             '',
             'Freundliche Grüsse',
             'Studio Luminelli',
@@ -272,7 +272,7 @@ function pj_mail_failed(array $pj, array $job): void
 
     send_plain_mail([
         'to' => (string) $pj['notify_to'],
-        'reply_to' => $job['email'],
+        'reply_to' => $job['email'] !== '' ? $job['email'] : null,
         'subject' => 'Projektor: FEHLGESCHLAGEN – ' . mb_substr($job['project'], 0, 60),
         'tag' => 'projektor',
         'body' => 'Fehler: ' . ($job['error'] ?? '?') . "\n\n" . pj_internal_summary($pj, $job, null),
@@ -289,7 +289,7 @@ function pj_internal_summary(array $pj, array $job, ?string $url): string
         : '-';
     return implode("\n", [
         'Entwurf:       ' . ($url ?? '-'),
-        'Kunde:         ' . $job['email'],
+        'Kunde:         ' . ($job['email'] !== '' ? $job['email'] : '(keine E-Mail angegeben)'),
         'Typ:           ' . ($r['type'] ?? '-'),
         'Kosten:        ' . $cost . ' (Limit $' . number_format(((int) $pj['budget_cents']) / 100, 2) . ')',
         'Stop:          ' . ($job['stop_reason'] ?? '-'),

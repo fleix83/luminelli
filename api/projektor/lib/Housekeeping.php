@@ -8,7 +8,7 @@ declare(strict_types=1);
  * if a real cron job is ever available.
  *
  * - drives running jobs forward (safety net if a webhook was lost)
- * - expires unconfirmed requests after 24 h (deletes their uploads)
+ * - removes requests that never started (uploads) after 24 h
  * - cleans up failed jobs' remote sessions after 3 days
  * - deletes drafts after keep_drafts_days and job records after 90 days
  */
@@ -53,7 +53,7 @@ function pj_housekeeping(array $pj, ?callable $log = null): void
             continue;
         }
 
-        if ($job['state'] === 'pending' && $age > 24 * 3600) {
+        if (in_array($job['state'], ['new', 'pending'], true) && $age > 24 * 3600) {
             $job['state'] = 'expired';
             pj_job_save($job);
             pj_rmdir(pj_job_dir($id) . '/uploads');

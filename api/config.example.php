@@ -55,9 +55,8 @@ return [
         'budget_cents' => 300,
         // Generations that may start per calendar day (Europe/Zurich)
         'daily_global_cap' => 10,
-        'per_email_per_day' => 1,
         'per_ip_per_day' => 1,
-        // Form submissions (confirmation mails) per IP and hour
+        // Form submissions per IP and hour (incl. rejected ones)
         'submits_per_ip_per_hour' => 3,
 
         // Public base URL of the site (for links in mails), no trailing slash
