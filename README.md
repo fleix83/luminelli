@@ -81,6 +81,63 @@ Encoding: `avifenc -q 42`, `cwebp -q 66`, JPEG quality ~72. Re-encoded files con
 Keep the originals in `docs/` (not deployed). If you change the crops, update the `width`/`height`
 attributes and both `<link rel="preload">` tags in `index.html`.
 
+## Projektor (AI draft generator)
+
+`projektor.html` lets a visitor describe a project, pick a font and a primary colour, upload files,
+and receive a clickable draft built by Claude Sonnet 5.5 (Anthropic **Managed Agents**: Anthropic runs
+the agent loop and a sandbox container; this server only starts jobs and collects the result).
+
+### Flow
+
+1. `api/projektor/submit.php` validates the form, stores the request in `api/storage/projektor/jobs/<id>/`
+   and mails a confirmation link (honeypot, 5 s time trap, max 3 submits per IP and hour).
+2. `api/projektor/confirm.php` (link in the mail) consumes a daily slot (1 per e-mail, 1 per IP,
+   `daily_global_cap` in total), uploads the files, starts a session with a **hard budget**
+   (`budget_cents`, default $3) and redirects to the status view `projektor.html?job=…&t=…`.
+3. The agent (system prompt: `api/projektor/prompt/system.md`) builds the draft in its sandbox and
+   leaves `build.zip` + `report.json` as session outputs.
+4. `webhook.php` (Anthropic calls it when the session is idle) and `status.php` (while the customer
+   watches) check the session. When it is idle,
+   `lib/Finalizer.php` unpacks the zip (whitelisted file types, no hidden files, no PHP, max 15 MB)
+   to `drafts_dir/<random slug>/`, mails the link to the customer and a summary (incl. cost and the
+   agent's notes) to `notify_to`, then deletes the uploaded inputs and the session at Anthropic.
+
+### Setup
+
+1. **Dependencies:** `composer install --no-dev` (creates `vendor/`, git-ignored; upload it with the site).
+2. **Subdomain** `entwurf.luminelli.ch` in Plesk with its document root **outside** `httpdocs`
+   (e.g. `/entwurf.luminelli.ch`), SSL on. Copy `deploy/entwurf/*` (incl. `.htaccess`) into it. Its CSP
+   lets drafts run their own JS but blocks every external request and form post. Remove
+   `http://localhost` from its `frame-ancestors` on the server.
+3. **Config** in `api/config.php` → `projektor`: `anthropic_api_key`, `site_url` (`https://luminelli.ch`),
+   `drafts_dir` (absolute path of the subdomain docroot), `drafts_url` (`https://entwurf.luminelli.ch`).
+   Mail must work (`dev_mode => false`), confirmation mails are essential.
+4. **Agent:** `php api/projektor/setup.php` (once; again after editing the prompt, model or effort, which
+   creates a new agent version). Then set `'enabled' => true`.
+5. **Webhook** (no cron job needed): Anthropic Console → **Manage → Webhooks → Add endpoint**
+   - URL: `https://luminelli.ch/api/projektor/webhook.php` (exactly this: a redirect, e.g. via www or
+     http, disables the endpoint immediately)
+   - Events: `session.status_idled` and `session.status_terminated`
+   - Copy the signing secret (`whsec_…`, shown only once) into `projektor.webhook_secret`.
+   When a session finishes, Anthropic calls the endpoint and the draft is delivered right away.
+   Housekeeping (expiring unconfirmed requests, cleaning up old drafts and failed sessions, and a safety
+   net for lost webhooks) runs automatically along with Projektor requests, at most every 10 minutes.
+   `cron.php` is optional if a cron job ever becomes available.
+6. `api/storage/` must be writable for PHP.
+
+### Costs and limits
+
+- Budget per draft is enforced by Anthropic (`budget_cents`); the session pauses at the cap and whatever
+  the agent packaged last is delivered. The notification mail shows the real cost.
+- Worst case per day: `daily_global_cap` × budget (default 10 × $3 = $30). Set a monthly spend limit
+  in the Anthropic Console as a second safety net.
+- Watch sessions live in the Console (link in the notification mail) while they run.
+
+### Not verified yet
+
+- Whether a headless browser can be installed in the sandbox for screenshots (the prompt falls back to
+  a code review). Check the first sessions in the Console.
+
 ## Keeping facts consistent (SEO/GEO)
 
 Name, address, phone, e-mail, service names and FAQ answers appear in: visible HTML, the JSON-LD in

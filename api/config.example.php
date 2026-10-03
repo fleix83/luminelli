@@ -36,4 +36,42 @@ return [
 
     // Random string used to hash IP addresses for the rate limit (no raw IPs are stored).
     'ip_salt' => 'change-me-to-a-long-random-string',
+
+    // ---------- Projektor (AI draft generator, see README) ----------
+    'projektor' => [
+        'enabled' => false,                  // set true once the API key and setup.php are done
+
+        // Anthropic API key (console.anthropic.com → API Keys). Never commit it.
+        'anthropic_api_key' => '',
+        // Signing secret of the webhook endpoint (Console → Manage → Webhooks, starts with whsec_)
+        'webhook_secret' => '',
+        // Console workspace ID for the session trace links in notification mails ('default' = Default workspace)
+        'anthropic_workspace' => 'default',
+
+        'model'  => 'claude-sonnet-5-5',
+        'effort' => 'high',                  // low | medium | high | xhigh | max
+
+        // Hard cost cap per generation, in US cents (enforced by Anthropic): 300 = $3.00
+        'budget_cents' => 300,
+        // Generations that may start per calendar day (Europe/Zurich)
+        'daily_global_cap' => 10,
+        'per_email_per_day' => 1,
+        'per_ip_per_day' => 1,
+        // Form submissions (confirmation mails) per IP and hour
+        'submits_per_ip_per_hour' => 3,
+
+        // Public base URL of the site (for links in mails), no trailing slash
+        'site_url' => 'http://localhost/luminelli',
+        // Where finished drafts are written, and the URL that serves that folder.
+        // Production: the document root of entwurf.luminelli.ch (outside httpdocs!).
+        'drafts_dir' => dirname(__DIR__, 2) . '/luminelli-entwurf',
+        'drafts_url' => 'http://localhost/luminelli-entwurf',
+
+        // Who gets the internal notifications (start, finished, failed)
+        'notify_to' => 'service@luminelli.ch',
+
+        // Housekeeping (cron.php)
+        'max_runtime_minutes' => 45,         // finalize/abort sessions running longer than this
+        'keep_drafts_days' => 60,
+    ],
 ];

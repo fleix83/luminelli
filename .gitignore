@@ -12,3 +12,9 @@ api/storage/*
 *.swp
 .idea/
 .vscode/
+
+# Composer dependencies (run `composer install --no-dev` before deploying)
+vendor/
+
+# Claude Code local state
+.claude/

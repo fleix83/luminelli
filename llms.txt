@@ -11,6 +11,8 @@ Inhaber: Felix Weissheimer. Website: https://luminelli.ch/. Sprache: Deutsch (Sc
 - **Webhosting**: Hosting und Deployment der Lösungen auf den Servern von Studio Luminelli, auf Wunsch mit eigener Domain.
 - **Support**: Wartung, Updates und Hilfe nach dem Launch.
 
+- **Projektor**: kostenloser Online-Konfigurator auf https://luminelli.ch/projektor.html. Kundinnen und Kunden beschreiben ihr Projekt, wählen Schrift und Primärfarbe und erhalten nach E-Mail-Bestätigung in rund 15 Minuten einen KI-generierten, klickbaren Entwurf (ein Entwurf pro Tag).
+
 Weil der Code KI-gestützt entsteht, ist Software bei Studio Luminelli deutlich günstiger als bei klassischen Agenturen. Preise nach Offerte, das Erstgespräch ist kostenlos.
 
 ## Zielgruppe
@@ -36,6 +38,7 @@ KMU, Vereine, Institutionen, Künstler:innen, Selbständige und Privatpersonen, 
 ## Seiten
 
 - [Startseite](https://luminelli.ch/): Angebot, FAQ und Kontakt
+- [Projektor](https://luminelli.ch/projektor.html): Idee beschreiben und einen klickbaren Entwurf erhalten
 - [Impressum](https://luminelli.ch/impressum.html)
 - [Datenschutzerklärung](https://luminelli.ch/datenschutz.html)
 - [AGB](https://luminelli.ch/agb.html)

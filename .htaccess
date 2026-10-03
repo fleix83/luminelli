@@ -31,13 +31,15 @@ ErrorDocument 404 /404.html
 
   # Block internal files and folders (return 404, don't reveal they exist)
   RewriteRule (^|/)\. - [R=404,L]
-  RewriteRule ^(docs|api/storage|api/lib)(/|$) - [R=404,L]
+  RewriteRule ^(docs|deploy|vendor|api/storage|api/lib|api/projektor/lib|api/projektor/prompt)(/|$) - [R=404,L]
   RewriteRule ^api/config(\.example)?\.php$ - [R=404,L]
+  RewriteRule ^api/projektor/(setup|cron)\.php$ - [R=404,L]
+  RewriteRule ^composer\.(json|lock)$ - [R=404,L]
   RewriteRule \.(md|log|sql|bak|ini|sh|lock|json\.dist)$ - [R=404,L]
 </IfModule>
 
 # Fallback if mod_rewrite is unavailable
-<FilesMatch "^(config\.php|config\.example\.php|.*\.log|.*\.md|\.env.*|\.git.*)$">
+<FilesMatch "^(config\.php|config\.example\.php|setup\.php|cron\.php|composer\.(json|lock)|.*\.log|.*\.md|\.env.*|\.git.*)$">
   Require all denied
 </FilesMatch>
 
@@ -74,7 +76,7 @@ ErrorDocument 404 /404.html
   Header always set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()"
   # The sha256 hash allows the one inline script that sets the "js" class.
   # If you change that script, recompute the hash (see README).
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'self' https://entwurf.luminelli.ch; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
   Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
   Header unset X-Powered-By
 </IfModule>

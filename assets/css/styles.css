@@ -233,6 +233,24 @@ a { color: inherit; }
 .service p { margin-top: .25rem; max-width: 38ch; }
 .service .text-link { margin-top: 1.5rem; display: inline-block; max-width: 20ch; }
 
+/* ---------- Projektor teaser ---------- */
+.teaser {
+  margin-top: var(--section-gap);
+  padding: clamp(2rem, 1.25rem + 3vw, 3.5rem);
+  border-radius: 1.5rem;
+  background: var(--c-chip-bg);
+}
+.teaser__kicker {
+  font-size: .875rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.teaser h2 { margin-top: .5rem; font-size: var(--fs-h2); font-weight: 700; line-height: 1.3; max-width: 26ch; }
+.teaser p:not(.teaser__kicker) { margin-top: .75rem; max-width: 48ch; }
+.teaser .btn { margin-top: 1.75rem; }
+
 /* ---------- About ---------- */
 .about { margin-top: var(--section-gap); }
 .about h2, .faq h2 {

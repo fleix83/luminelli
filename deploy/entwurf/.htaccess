@@ -1,0 +1,38 @@
+# entwurf.luminelli.ch – document root for Projektor drafts (AI-generated, untrusted).
+# Each draft lives in /<random-slug>/. Copy this file into the subdomain's docroot.
+
+Options -Indexes -ExecCGI
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+AddType image/avif .avif
+
+# Never execute anything server-side in here
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .cgi .pl .py
+<FilesMatch "\.(php\d?|phtml|phar|cgi|pl|py|sh)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # HTTPS only (not on localhost)
+  RewriteCond %{HTTP_HOST} ^entwurf\.luminelli\.ch$ [NC]
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://entwurf.luminelli.ch%{REQUEST_URI} [R=301,L]
+  # Hidden files and leftover temp folders
+  RewriteRule (^|/)\. - [R=404,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Drafts may run their own scripts and inline styles, but can't talk to anyone:
+  # no external requests, no form posts, no embedding except on luminelli.ch.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'none'; media-src 'self' blob:; form-action 'none'; base-uri 'self'; object-src 'none'; frame-ancestors 'self' https://luminelli.ch http://localhost"
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header set Cache-Control "no-cache"
+</IfModule>
