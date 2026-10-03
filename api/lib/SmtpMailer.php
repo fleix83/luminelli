@@ -29,9 +29,20 @@ final class SmtpMailer
 
         $remote = ($enc === 'ssl' ? 'ssl://' : 'tcp://') . $host . ':' . $port;
         $ctx = stream_context_create(['ssl' => ['verify_peer' => true, 'verify_peer_name' => true, 'peer_name' => $host]]);
-        $socket = @stream_socket_client($remote, $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $ctx);
+        // Collect PHP's warnings: on a failed TLS handshake $errstr stays empty
+        // and the real reason (e.g. "certificate verify failed") is a warning.
+        $warnings = [];
+        set_error_handler(static function (int $no, string $msg) use (&$warnings): bool {
+            $warnings[] = preg_replace('/^stream_socket_client\(\): /', '', $msg);
+            return true;
+        });
+        try {
+            $socket = stream_socket_client($remote, $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $ctx);
+        } finally {
+            restore_error_handler();
+        }
         if ($socket === false) {
-            throw new RuntimeException("SMTP connect failed: $errstr ($errno)");
+            throw new RuntimeException("SMTP connect to $remote failed: $errstr ($errno)" . ($warnings ? ' – ' . implode(' | ', $warnings) : ''));
         }
         $this->socket = $socket;
         stream_set_timeout($socket, $timeout);

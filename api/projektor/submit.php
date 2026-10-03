@@ -195,6 +195,7 @@ $sent = send_plain_mail([
 ], $pj['_root']);
 
 if (!$sent) {
+    rate_limit_release('pj-submit:' . $ip, $pj['_root'], 'projektor-submits'); // our failure doesn't count
     pj_rmdir(pj_job_dir($job['id']));
     pj_json(['ok' => false, 'error' => 'Wir konnten Ihnen keine Bestätigungs-E-Mail senden. Bitte prüfen Sie die Adresse oder versuchen Sie es später erneut.'], 500);
 }

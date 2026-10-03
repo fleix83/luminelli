@@ -99,6 +99,26 @@ function rate_limit_allows(string $key, array $config, string $bucket = 'ratelim
     return $allowed;
 }
 
+/** Undo the most recent hit (the request failed on our side, e.g. mail not sent). */
+function rate_limit_release(string $key, array $config, string $bucket = 'ratelimit'): void
+{
+    $file = STORAGE_DIR . '/' . $bucket . '/' . hash_id($key, $config) . '.json';
+    $fh = @fopen($file, 'c+');
+    if ($fh === false) {
+        return;
+    }
+    flock($fh, LOCK_EX);
+    $hits = json_decode((string) stream_get_contents($fh), true);
+    if (is_array($hits) && $hits) {
+        array_pop($hits);
+        ftruncate($fh, 0);
+        rewind($fh);
+        fwrite($fh, json_encode(array_values($hits)));
+    }
+    flock($fh, LOCK_UN);
+    fclose($fh);
+}
+
 function encode_header(string $text): string
 {
     return preg_match('/[^\x20-\x7E]/', $text) ? '=?UTF-8?B?' . base64_encode($text) . '?=' : $text;

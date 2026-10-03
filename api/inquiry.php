@@ -103,6 +103,7 @@ function handle_inquiry(array $data, array $context): array
         $sent = false;
     }
     if (!$sent) {
+        rate_limit_release((string) $context['ip'], $config); // our failure doesn't count
         return ['ok' => false, 'status' => 500, 'error' => 'Ihre Anfrage konnte leider nicht gesendet werden. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an service@luminelli.ch.'];
     }
 
