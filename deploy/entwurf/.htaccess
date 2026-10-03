@@ -29,10 +29,10 @@ RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .cgi .pl .py
 <IfModule mod_headers.c>
   # Drafts may run their own scripts and inline styles, but can't talk to anyone:
   # no external requests, no form posts, no embedding except on luminelli.ch.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'none'; media-src 'self' blob:; form-action 'none'; base-uri 'self'; object-src 'none'; frame-ancestors 'self' https://luminelli.ch http://localhost"
-  Header always set X-Robots-Tag "noindex, nofollow, noarchive"
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set Referrer-Policy "no-referrer"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'none'; media-src 'self' blob:; form-action 'none'; base-uri 'self'; object-src 'none'; frame-ancestors 'self' https://luminelli.ch https://staging.luminelli.ch http://localhost"
+  Header set X-Robots-Tag "noindex, nofollow, noarchive"
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "no-referrer"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
   Header set Cache-Control "no-cache"
 </IfModule>
