@@ -47,6 +47,10 @@ if ($url !== '') {
         $errors['url'] = 'Bitte geben Sie eine gültige Adresse ein, z. B. https://beispiel.ch.';
     }
 }
+$ownSite = ($_POST['own_site'] ?? '') === '1';
+if ($ownSite && $url === '') {
+    $errors['url'] = 'Bitte geben Sie die Adresse Ihrer Website an, damit wir die Bilder übernehmen können.';
+}
 $project = $in('project');
 if (mb_strlen($project) < 5 || mb_strlen($project) > 200) {
     $errors['project'] = 'Bitte beschreiben Sie Ihr Projekt in einem Satz (5 bis 200 Zeichen).';
@@ -161,6 +165,7 @@ $job = pj_job_create([
     'email' => $email,
     'ip_hash' => $ipHash,
     'reference_url' => $url,
+    'own_site' => $ownSite,
     'project' => $project,
     'description' => $description,
     'font' => $font,
@@ -171,6 +176,18 @@ foreach ($uploads as $u) {
     move_uploaded_file($u['tmp'], pj_job_dir($job['id']) . '/uploads/' . $u['name']);
     $job['files'][] = ['name' => $u['name'], 'stored' => $u['name'], 'mime' => $u['mime'], 'size' => $u['size'], 'role' => $u['role']];
 }
+
+// Visitor's own website: copy its images (server-side, SSRF-hardened) so the
+// agent can reuse them. Problems here never block the draft.
+if ($ownSite && $url !== '') {
+    $import = pj_import_site_images($url, pj_job_dir($job['id']) . '/uploads');
+    foreach ($import['files'] as $f) {
+        $job['files'][] = ['name' => $f['name'], 'stored' => $f['name'], 'mime' => $f['mime'], 'size' => $f['size'], 'role' => 'site', 'source' => $f['source']];
+    }
+    $job['site_import_notes'] = $import['notes'];
+}
+
+pj_job_save($job);
 
 try {
     pj_start_session($pj, $job);
@@ -184,7 +201,7 @@ try {
     // Our failure: give the slots back so the visitor can try again.
     pj_limits_release($pj, $ipHash);
     rate_limit_release('pj-submit:' . $ip, $pj['_root'], 'projektor-submits');
-    pj_fail($pj, $job, 'Start fehlgeschlagen: ' . $e->getMessage());
+    pj_job_save(pj_fail($pj, $job, 'Start fehlgeschlagen: ' . $e->getMessage()));
     pj_json(['ok' => false, 'error' => 'Der Projektor konnte gerade nicht starten. Bitte versuchen Sie es in ein paar Minuten erneut.'], 502);
 }
 

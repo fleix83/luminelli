@@ -58,6 +58,7 @@ function pj_start_session(array $pj, array &$job): void
     $resources[] = ['type' => 'file', 'file_id' => $fontFileId, 'mount_path' => $fontPath];
 
     $screenshotPath = null;
+    $siteImages = [];
     foreach ($job['files'] as $f) {
         $local = pj_job_dir($job['id']) . '/uploads/' . $f['stored'];
         $fileId = pj_upload($client, $local, $f['name'], $f['mime']);
@@ -65,6 +66,9 @@ function pj_start_session(array $pj, array &$job): void
         if ($f['role'] === 'screenshot') {
             $mount = PJ_INPUT_DIR . '/reference/' . $f['name'];
             $screenshotPath = $mount;
+        } elseif ($f['role'] === 'site') {
+            $mount = PJ_INPUT_DIR . '/site/' . $f['name'];
+            $siteImages[] = ['path' => $mount, 'filename' => $f['name'], 'mime_type' => $f['mime'], 'size_bytes' => $f['size'], 'source_url' => $f['source'] ?? null];
         } else {
             $mount = PJ_INPUT_DIR . '/assets/' . $f['name'];
             $assets[] = ['path' => $mount, 'filename' => $f['name'], 'mime_type' => $f['mime'], 'size_bytes' => $f['size']];
@@ -75,6 +79,7 @@ function pj_start_session(array $pj, array &$job): void
     $request = [
         'request_id' => $job['id'],
         'reference_url' => $job['reference_url'] ?: null,
+        'reference_is_own_site' => !empty($job['own_site']),
         'reference_screenshot' => $screenshotPath,
         'project' => $job['project'],
         'description' => $job['description'],
@@ -87,6 +92,9 @@ function pj_start_session(array $pj, array &$job): void
         'primary_color' => $job['color'],
         'assets' => $assets,
     ];
+    if (!empty($job['own_site'])) {
+        $request['site_images'] = $siteImages;
+    }
     $text = "<request>\n" . json_encode($request, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n</request>";
     if ($job['reference_url']) {
         // web_fetch may only fetch URLs that appear in the conversation.
@@ -94,7 +102,7 @@ function pj_start_session(array $pj, array &$job): void
     }
 
     $session = $client->beta->sessions->create(
-        agent: ['type' => 'agent', 'id' => $setup['agent_id'], 'version' => (int) $setup['agent_version']],
+        agent: $setup['agent_id'], // latest version: setup.php updates apply to new sessions right away
         environmentID: $setup['environment_id'],
         budget: ['type' => 'limit', 'max_list_cost' => ['amount' => (string) (int) $pj['budget_cents'], 'currency' => 'USD']],
         initialEvents: [

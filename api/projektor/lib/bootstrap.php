@@ -20,6 +20,7 @@ require_once __DIR__ . '/Limits.php';
 require_once __DIR__ . '/Agent.php';
 require_once __DIR__ . '/Finalizer.php';
 require_once __DIR__ . '/Housekeeping.php';
+require_once __DIR__ . '/SiteImages.php';
 
 const PJ_DIR = STORAGE_DIR . '/projektor';
 const PJ_SETUP_FILE = PJ_DIR . '/setup.json';

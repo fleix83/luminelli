@@ -231,6 +231,7 @@ function validate(form) {
   const errors = {};
   const url = v('url');
   if (url && !/^(https?:\/\/)?[^\s/$.?#]+\.[^\s]{2,}$/i.test(url)) errors.url = 'Bitte geben Sie eine gültige Adresse ein, z. B. https://beispiel.ch.';
+  if (form.elements.own_site.checked && !url) errors.url = 'Bitte geben Sie die Adresse Ihrer Website an, damit wir die Bilder übernehmen können.';
   const project = v('project');
   if (project.length < 5) errors.project = 'Bitte beschreiben Sie Ihr Projekt in einem Satz.';
   const description = v('description');
@@ -285,7 +286,7 @@ function initForm() {
     const button = form.querySelector('.pj-submit');
     button.disabled = true;
     button.setAttribute('aria-busy', 'true');
-    button.textContent = 'Projektor startet';
+    button.textContent = form.elements.own_site.checked ? 'Bilder werden geholt …' : 'Projektor startet';
     try {
       const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       const body = await res.json().catch(() => ({}));

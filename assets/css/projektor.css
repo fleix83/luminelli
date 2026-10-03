@@ -107,6 +107,8 @@ textarea.pj-input { resize: vertical; min-height: 6rem; }
   border-color: var(--c-text);
 }
 .pj-input[aria-invalid="true"] { border-color: var(--c-error); }
+.pj-ownsite { margin-top: .75rem; }
+.pj-hint { margin-top: .35rem; padding-left: 2.25rem; font-size: .875rem; color: var(--c-text-muted); }
 .pj-optional { font-weight: 400; color: var(--c-text-muted); }
 .pj-count { margin-top: .35rem; font-size: .875rem; color: var(--c-text-muted); text-align: right; }
 
