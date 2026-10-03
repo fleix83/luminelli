@@ -99,7 +99,7 @@ function handle_inquiry(array $data, array $context): array
     try {
         $sent = send_mail(build_mail($inquiry, $config), $config);
     } catch (Throwable $e) {
-        error_log('[inquiry] ' . $e->getMessage());
+        app_log('[inquiry] ' . get_class($e) . ': ' . $e->getMessage());
         $sent = false;
     }
     if (!$sent) {

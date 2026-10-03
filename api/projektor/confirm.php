@@ -63,7 +63,7 @@ try {
             $job['started_at'] = pj_now()->format(DATE_ATOM);
             $job['last_poll'] = time();
         } catch (Throwable $e) {
-            error_log('[projektor] start ' . $id . ': ' . $e->getMessage());
+            app_log('[projektor] start ' . $id . ': ' . $e->getMessage());
             pj_limits_release($pj, $job['email'], (string) $job['ip_hash']);
             $job = pj_fail($pj, $job, 'Start fehlgeschlagen: ' . $e->getMessage());
         }

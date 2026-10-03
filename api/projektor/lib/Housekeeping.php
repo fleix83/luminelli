@@ -29,7 +29,7 @@ function pj_maybe_housekeeping(array $pj): void
     try {
         pj_housekeeping($pj);
     } catch (Throwable $e) {
-        error_log('[projektor] housekeeping: ' . $e->getMessage());
+        app_log('[projektor] housekeeping: ' . $e->getMessage());
     } finally {
         flock($fh, LOCK_UN);
         fclose($fh);

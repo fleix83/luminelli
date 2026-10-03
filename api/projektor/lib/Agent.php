@@ -203,14 +203,14 @@ function pj_cleanup_remote(array $pj, array $job): void
         try {
             $client->beta->files->delete($fileId);
         } catch (Throwable $e) {
-            error_log("[projektor] delete file $fileId: " . $e->getMessage());
+            app_log("[projektor] delete file $fileId: " . $e->getMessage());
         }
     }
     if (!empty($job['session_id'])) {
         try {
             $client->beta->sessions->delete($job['session_id']);
         } catch (Throwable $e) {
-            error_log("[projektor] delete session {$job['session_id']}: " . $e->getMessage());
+            app_log("[projektor] delete session {$job['session_id']}: " . $e->getMessage());
         }
     }
 }

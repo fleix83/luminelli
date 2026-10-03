@@ -55,7 +55,7 @@ function pj_poll_job(array $pj, array $job, bool $withActivity = false, bool $fo
         }
         pj_job_save($job);
     } catch (Throwable $e) {
-        error_log('[projektor] poll ' . $job['id'] . ': ' . $e->getMessage());
+        app_log('[projektor] poll ' . $job['id'] . ': ' . $e->getMessage());
     } finally {
         pj_job_unlock($lock);
     }

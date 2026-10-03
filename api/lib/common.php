@@ -10,6 +10,25 @@ const STORAGE_DIR = __DIR__ . '/../storage';
 
 require_once __DIR__ . '/SmtpMailer.php';
 
+// Record fatal errors (blank 500s) in app.log as well.
+register_shutdown_function(static function (): void {
+    $e = error_get_last();
+    if ($e && in_array($e['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR], true)) {
+        app_log('[fatal] ' . $e['message'] . ' in ' . basename($e['file']) . ':' . $e['line']);
+    }
+});
+
+/**
+ * Log to PHP's error_log and to api/storage/app.log (readable in the Plesk
+ * file manager when the hosting's error log isn't accessible). Never log secrets.
+ */
+function app_log(string $message): void
+{
+    error_log($message);
+    $line = '[' . date('Y-m-d H:i:s') . '] ' . str_replace(["\r", "\n"], ' ', $message) . "\n";
+    @file_put_contents(STORAGE_DIR . '/app.log', $line, FILE_APPEND | LOCK_EX);
+}
+
 function load_config(): array
 {
     static $config = null;
@@ -134,6 +153,7 @@ function compose_mail(array $msg, array $config): array
 function send_mail(array $mail, array $config): bool
 {
     if (!empty($config['dev_mode'])) {
+        app_log('[mail] dev_mode is on: mail written to mail.log, not sent');
         $entry = str_repeat('=', 72) . "\n"
             . 'To: ' . $mail['to'] . "\n"
             . 'Subject: ' . $mail['subject'] . "\n"
@@ -147,13 +167,18 @@ function send_mail(array $mail, array $config): bool
         return true;
     }
 
-    return mail(
+    $ok = mail(
         $mail['to'],
         encode_header($mail['subject']),
         $mail['encoded_body'],
         implode("\r\n", $mail['headers']),
         '-f' . $mail['from']
     );
+    if (!$ok) {
+        $err = error_get_last();
+        app_log('[mail] mail() returned false' . ($err ? ': ' . $err['message'] : ''));
+    }
+    return $ok;
 }
 
 /** Convenience: compose + send, never throws. */
@@ -162,7 +187,7 @@ function send_plain_mail(array $msg, array $config): bool
     try {
         return send_mail(compose_mail($msg, $config), $config);
     } catch (Throwable $e) {
-        error_log('[mail] ' . $e->getMessage());
+        app_log('[mail] ' . get_class($e) . ': ' . $e->getMessage());
         return false;
     }
 }
