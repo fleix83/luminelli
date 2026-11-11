@@ -119,7 +119,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   margin: 0;
 }
 .brand a { display: block; }
-.brand img { width: 100%; }
+.brand svg { display: block; width: 100%; height: auto; }
+/* Asterisks: black at rest; site.js lets them flicker yellow on movement */
+.luminelli-logo .stern { stroke: var(--ink); stroke-width: 0.5; }
 
 .letter {
   max-width: var(--measure);
