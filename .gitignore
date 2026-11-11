@@ -1,11 +1,7 @@
-# Secrets
-api/config.php
-.env*
-
-# Runtime data (mail log in DEV mode, rate-limit files)
-api/storage/*
-!api/storage/.htaccess
-!api/storage/.gitkeep
+# Old one-pager (Projektor, PHP API, legal stubs), archived 2026-11-11.
+# Its last committed state is in git history (commit 49de342); the folder holds
+# secrets (api/config.php) and must never be committed or deployed.
+_archiv/
 
 # OS / editor
 .DS_Store
@@ -13,8 +9,5 @@ api/storage/*
 .idea/
 .vscode/
 
-# Composer dependencies (run `composer install --no-dev` before deploying)
-vendor/
-
-# Claude Code local state
+# Claude local state
 .claude/

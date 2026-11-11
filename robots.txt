@@ -1,7 +1,6 @@
-# Studio Luminelli – all crawlers welcome, including AI/answer engines
+# Studio Luminelli: all crawlers welcome, including AI and answer engines
 User-agent: *
 Allow: /
-Disallow: /api/
 
 User-agent: GPTBot
 Allow: /
