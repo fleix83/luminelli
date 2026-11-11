@@ -125,7 +125,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 
 .letter {
   max-width: var(--measure);
-  padding-top: 8.13em; /* first line where the mockup has it */
+  padding-top: 6.4em; /* 160px: a line higher than the mockup, so the text fits on screen */
 }
 .letter > * + * { margin-top: var(--space-line); }
 
@@ -188,7 +188,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
     grid-column: 2;
     grid-row: 1 / 3;
     max-width: none;
-    padding-top: max(7em, 24vh);
+    padding-top: max(5.5em, 18vh);
   }
   .letter.doc { padding-top: max(6em, 18vh); }
   .sender {
