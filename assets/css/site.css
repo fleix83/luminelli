@@ -45,8 +45,8 @@
 :root {
   --paper: #ffffff;
   --ink: #000000;
-  --accent: #2937f6;
-  --accent-soft: #e6e8fe;
+  --accent: #f62929;
+  --accent-soft: #fff4f4;
   --font-serif: "Cormorant", "Cormorant Fallback", "Cormorant Garamond", Garamond, Georgia, serif;
 
   /* 25 px at the mockup's 402 px, scaled down on smaller phones, never below 20 px */
@@ -136,6 +136,13 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
 .note:empty { display: none; }
 .nowrap { white-space: nowrap; }
 
+/* Quiet band behind all text: one band per line, with a gap between lines */
+.marked {
+  background: linear-gradient(var(--accent-soft), var(--accent-soft)) 0 55% / 100% 0.95em no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 .sender {
   max-width: var(--measure);
   margin-top: 2.9em; /* 58px at 20px, as drawn */
@@ -143,7 +150,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-
   line-height: 1;     /* 20px, as drawn */
 }
 .sender address { font-style: italic; }
-.sender .contact { margin-top: 1em; }
+.sender .contact { margin-top: 1em; line-height: 1.35; } /* room for descenders above the next underline */
 .sender .legal { margin-top: 2em; }
 .sender a { text-underline-offset: 0.18em; }
 
