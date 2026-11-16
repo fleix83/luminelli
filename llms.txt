@@ -16,6 +16,64 @@ Stand: November 2026
 
 KMU, Institutionen, Vereine und Selbständige. Schwerpunkt ist die Region Basel (Basel-Stadt, Basel-Landschaft), die Zusammenarbeit funktioniert auch remote in der ganzen Schweiz.
 
+## Lösungen
+
+- [Lösungen für KMU und Gewerbe](https://luminelli.ch/loesungen/kmu.html): Ihre Kundschaft bucht online, Ihr Team erfasst vor Ort. Weniger Telefon, Zettel und Excel im Alltag.
+  - Buchungssystem: Ihre Kundschaft bucht freie Termine selbst, rund um die Uhr. Bestätigung und Erinnerung gehen automatisch per E-Mail raus, eine Absage ist mit einem Klick erledigt.
+  - Preisrechner statt Rückruf: Interessierte stellen ihr Angebot online zusammen und sehen sofort einen Richtpreis. Bei Ihnen landet eine vollständige Anfrage statt eines verpassten Anrufs.
+  - Rapport auf Smartphone: Stunden, Material und Fotos direkt vor Ort erfassen und vom Kunden unterschreiben lassen. Das Büro erhält ein fertiges PDF für die Rechnung.
+  - Einsatzplan (ohne Excel): Wer arbeitet wann? Schichten planen, untereinander tauschen und bestätigen, auf jedem Gerät. Keine Versionen mehr, die herumgeschickt werden.
+  - Vorbestellung mit Abholtermin: Ihre Kundschaft bestellt online und wählt einen Abholtermin. Sie erhalten eine Tagesliste für die Produktion.
+  - Gutscheine online anbieten: Gutscheine online verkaufen, mit QR-Code einlösen und den Restwert jederzeit im Blick behalten.
+  - Inventar und Geräteausleihe: QR-Etiketten auf Werkzeug und Geräten, Ausleihe und Rückgabe per Handy, Wartungstermine inklusive.
+  - Wartungserinnerung: Eine Kundenliste mit Fälligkeiten. Kundschaft und Team werden rechtzeitig erinnert.
+  - Alle Anfragen an einem Ort: Anfragen aus E-Mail, Telefon und Social Media landen in einer Liste mit Status und Wiedervorlage.
+- [Lösungen für Gemeinden](https://luminelli.ch/loesungen/gemeinden.html): Kleine Online-Dienste, die Ihre Verwaltung entlasten und der Bevölkerung den Weg an den Schalter ersparen.
+  - Räume reservieren: Belegungsplan online, provisorische Reservation mit wenigen Klicks, Bestätigung und Rechnung automatisch. Für Mehrzweckhalle, Singsaal oder Gemeindesaal.
+  - Mängel melden mit Foto: Schlagloch, defekte Lampe, wilde Deponie: Meldung mit Foto und Standort, Weiterleitung an den Werkhof, der Stand ist für die Meldenden sichtbar.
+  - Termine am Schalter: Termin mit Anliegen online buchen, dazu eine Checkliste der mitzubringenden Unterlagen.
+  - Sperrgut und Abfallkalender: Abholung online anmelden, Sammeltermine als Erinnerung aufs Handy.
+  - Gesuche für Anlässe: Ein geführtes Formular statt eines mehrseitigen PDF. Das Gesuch geht automatisch an Polizei, Feuerwehr und Bauamt.
+  - Tarifrechner Tagesstrukturen: Eltern berechnen ihren Beitrag selbst und melden ihr Kind gleich an.
+  - Wartelisten: Position einsehen, Bestätigung erhalten, jährliche Rückfrage automatisch.
+  - Einsatzplan fürs Wahlbüro: Einsätze verteilen, bestätigen lassen und rechtzeitig erinnern.
+- [Lösungen für Vereine und Verbände](https://luminelli.ch/loesungen/vereine.html): Helferpläne, Anmeldungen und Reservationen, die sich fast von selbst organisieren. Das entlastet Vorstand und Freiwillige.
+  - Helferplan fürs Fest: Helferinnen und Helfer tragen sich selbst in Schichten ein und werden rechtzeitig erinnert. Sie sehen auf einen Blick, wo noch Leute fehlen.
+  - Anmeldung für Anlässe: Anmeldung mit Menüwahl, Teilnehmerliste und Namensschilder in einem Ablauf.
+  - Platz- und Hallenreservation: Online-Belegung mit Ihren Regeln, etwa höchstens zwei Buchungen pro Woche, Gäste inklusive.
+  - Fahr- und Ämtliplan: Fahrdienste zu Auswärtsspielen, Kuchenbuffet und Trikotwäsche fair verteilen.
+  - Turnierplan mit Live-Resultaten: Spielplan erzeugen, Resultate per Handy erfassen, Rangliste live auf dem Bildschirm.
+  - Probenplan und Absenzen: Probendaten, An- und Abmelden, Übersicht pro Stimme oder Register.
+  - Spesen und Belege: Beleg fotografieren, Freigabe durch den Kassier, Export für die Buchhaltung.
+  - Mitglieder pflegen ihre Daten selbst: Mitglieder ändern Adresse und Kontaktdaten selbst, der Vorstand sieht immer den aktuellen Stand.
+- [Lösungen für Institutionen](https://luminelli.ch/loesungen/institutionen.html): Einsatzpläne, Kursanmeldungen und Statistik für Schulen, Beratungsstellen, Kirchgemeinden, Museen und Stiftungen.
+  - Einsatzplan für Team und Freiwillige: Dienste planen, tauschen und bestätigen, mit einer Übersicht pro Woche. Bei einer Basler Beratungsstelle bereits im Einsatz.
+  - Ihre Zahlen auf einen Blick: Kontakte anonym nach Thema erfassen und als Statistik auswerten, bereit für Jahresbericht und Geldgeber.
+  - Kursanmeldung mit Warteliste: Anmeldung, Warteliste rückt automatisch nach, Präsenz und Teilnahmebestätigung.
+  - Mittagstisch an- und abmelden: Module wählen, kurzfristig abmelden, die Küche erhält eine Tagesliste.
+  - Elterngespräche buchen: Lehrpersonen geben Zeitfenster frei, Eltern buchen selbst und werden erinnert.
+  - Anfragen an die Kirchgemeinde: Anfrage für Taufe oder Hochzeit mit Wunschdatum, dazu die Belegung des Kirchgemeindehauses.
+  - Führungen und Gruppen: Datum, Gruppengrösse und Sprache wählen, Bestätigung und Rechnung folgen automatisch.
+  - Angebotsverzeichnis: Fachstellen und Angebote durchsuchbar an einem Ort, mit Filter nach Region, Thema und Sprache.
+- [Lösungen für Selbständige und Kulturschaffende](https://luminelli.ch/loesungen/selbstaendige.html): Schlanke Werkzeuge für Kulturschaffende und Freelancer, die zu Ihrer Arbeit und zu Ihrem Budget passen.
+  - Werkverzeichnis und Portfolio: Werke mit Bild, Mass, Preis und Status erfassen, Ausstellungen dokumentieren und ausgewählte Arbeiten online zeigen, mit Anfrage direkt zum Werk.
+  - Fördergesuche im Griff: Stiftungen, Fristen, Unterlagen und Zusagen an einem Ort, bereit für das nächste Gesuch.
+  - Budget- und Honorarrechner: Projektbudget mit Honoraren nach den Empfehlungen der Berufsverbände, als Export fürs Gesuch.
+  - Unterricht buchen: Lektionen online buchen, Zehnerabos verwalten, Absageregeln inklusive.
+  - Offerten auf Knopfdruck: Leistungen auswählen, Offerte als PDF im eigenen Design.
+  - Booking-Anfrage: Formular mit Datum, Ort, Technik und Budget. Techrider und Pressetext liegen zum Herunterladen bereit.
+  - Plätze für kleine Anlässe: Plätze reservieren, Warteliste, Liste für die Abendkasse.
+  - Projektzeit erfassen: Zeit pro Projekt erfassen, als Übersicht und Grundlage für die Rechnung.
+- [Lösungen für Privatpersonen](https://luminelli.ch/loesungen/privatpersonen.html): Fest-Website, Waschplan oder Ferienhaus der Familie: Ordnung und Gemeinschaft rund um Familie, Haus und Hobby.
+  - Ihr Fest, Ihre Website: Einladung, Anmeldung mit Menüwahl, Mitfahrbörse und Fotoalbum für Hochzeit, Jubiläum oder Klassentreffen.
+  - Digitaler Waschplan: Zeitfenster reservieren, tauschen und erinnert werden.
+  - Ferienhaus der Familie: Belegungskalender, Regeln, Kostenaufteilung und Putzliste an einem Ort.
+  - Stockwerkeigentum: Dokumente, Traktanden, Pendenzen und Meldungen für alle Eigentümerinnen und Eigentümer.
+  - Wer möchte was?: Gegenstände mit Foto erfassen, Wünsche anmelden, fair zuteilen.
+  - Familienchronik: Rezepte, Geschichten und Bilder sammeln, auch als Druckversion.
+  - Sammlung katalogisieren: Objekte mit Foto, Wert und Herkunft erfassen und durchsuchen.
+  - Ausleihbörse im Quartier: Werkzeug und Geräte teilen und reservieren.
+
 ## Kontakt
 
 - Studio Luminelli, Felix Weissheimer, Luftgässlein 3, 4051 Basel, Schweiz
@@ -26,4 +84,10 @@ KMU, Institutionen, Vereine und Selbständige. Schwerpunkt ist die Region Basel 
 ## Seiten
 
 - [Startseite](https://luminelli.ch/): Angebot und Kontakt
+- [Lösungen für KMU und Gewerbe](https://luminelli.ch/loesungen/kmu.html)
+- [Lösungen für Gemeinden](https://luminelli.ch/loesungen/gemeinden.html)
+- [Lösungen für Vereine und Verbände](https://luminelli.ch/loesungen/vereine.html)
+- [Lösungen für Institutionen](https://luminelli.ch/loesungen/institutionen.html)
+- [Lösungen für Selbständige und Kulturschaffende](https://luminelli.ch/loesungen/selbstaendige.html)
+- [Lösungen für Privatpersonen](https://luminelli.ch/loesungen/privatpersonen.html)
 - [Impressum und Datenschutz](https://luminelli.ch/impressum.html)

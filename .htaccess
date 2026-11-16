@@ -35,7 +35,7 @@ ErrorDocument 404 /404.html
 
   # Never serve internal files and folders (404, don't reveal they exist)
   RewriteRule (^|/)\. - [R=404,L]
-  RewriteRule ^(_archiv|docs)(/|$) - [R=404,L]
+  RewriteRule ^(_archiv|docs|admin|content)(/|$) - [R=404,L]
   RewriteRule \.(md|log|sql|bak|ini|sh|lock)$ - [R=404,L]
 </IfModule>
 

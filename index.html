@@ -8,15 +8,16 @@
   <link rel="canonical" href="https://luminelli.ch/">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="author" content="Felix Weissheimer">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="format-detection" content="telephone=no">
   <meta name="geo.region" content="CH-BS">
   <meta name="geo.placename" content="Basel">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="format-detection" content="telephone=no">
 
   <link rel="preload" href="assets/fonts/cormorant-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/cormorant-latin-700-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/site.css?v=5">
-  <script src="assets/js/site.js?v=5" defer></script>
+  <link rel="stylesheet" href="assets/css/site.css?v=9">
+  <link rel="stylesheet" href="assets/css/tints.css?v=36b0bd5c">
+  <script src="assets/js/site.js?v=9" defer></script>
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -37,87 +38,159 @@
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "ProfessionalService",
-        "@id": "https://luminelli.ch/#studio",
-        "name": "Studio Luminelli",
-        "alternateName": "Luminelli",
-        "url": "https://luminelli.ch/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://luminelli.ch/assets/img/logo.png",
-          "width": 404,
-          "height": 304
-        },
-        "image": "https://luminelli.ch/assets/img/og-image.jpg",
-        "description": "Studio Luminelli ist ein Ein-Personen-Studio in Basel. Es entwickelt mit KI-gestützter Softwareentwicklung massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige, schneller und günstiger als Standardlösungen mit teuren Abos.",
-        "email": "service@luminelli.ch",
-        "telephone": "+41 76 757 60 52",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Luftgässlein 3",
-          "postalCode": "4051",
-          "addressLocality": "Basel",
-          "addressRegion": "BS",
-          "addressCountry": "CH"
-        },
-        "areaServed": [
-          { "@type": "AdministrativeArea", "name": "Basel-Stadt" },
-          { "@type": "AdministrativeArea", "name": "Basel-Landschaft" },
-          { "@type": "Country", "name": "Schweiz" }
-        ],
-        "founder": { "@id": "https://luminelli.ch/#felix" },
-        "knowsAbout": ["Massgeschneiderte Software", "Webtools", "Webapplikationen", "KI-gestützte Softwareentwicklung"],
-        "knowsLanguage": "de",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "email": "service@luminelli.ch",
-          "telephone": "+41 76 757 60 52",
-          "availableLanguage": "de"
-        },
-        "makesOffer": {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Massgeschneiderte Webtools",
-            "serviceType": "Softwareentwicklung",
-            "description": "Individuell entwickelte Webtools statt teurer Abos und starrer Standardlösungen, dank KI schneller und günstiger umgesetzt.",
-            "audience": { "@type": "BusinessAudience", "audienceType": "KMU, Institutionen, Vereine und Selbständige" },
-            "provider": { "@id": "https://luminelli.ch/#studio" }
+      "@context": "https://schema.org",
+      "@graph": [
+          {
+              "@type": "ProfessionalService",
+              "@id": "https://luminelli.ch/#studio",
+              "name": "Studio Luminelli",
+              "alternateName": "Luminelli",
+              "url": "https://luminelli.ch/",
+              "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://luminelli.ch/assets/img/logo.png",
+                  "width": 404,
+                  "height": 304
+              },
+              "image": "https://luminelli.ch/assets/img/og-image.jpg",
+              "description": "Studio Luminelli ist ein Ein-Personen-Studio in Basel. Es entwickelt mit KI-gestützter Softwareentwicklung massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige, schneller und günstiger als Standardlösungen mit teuren Abos.",
+              "email": "service@luminelli.ch",
+              "telephone": "+41 76 757 60 52",
+              "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Luftgässlein 3",
+                  "postalCode": "4051",
+                  "addressLocality": "Basel",
+                  "addressRegion": "BS",
+                  "addressCountry": "CH"
+              },
+              "areaServed": [
+                  {
+                      "@type": "AdministrativeArea",
+                      "name": "Basel-Stadt"
+                  },
+                  {
+                      "@type": "AdministrativeArea",
+                      "name": "Basel-Landschaft"
+                  },
+                  {
+                      "@type": "Country",
+                      "name": "Schweiz"
+                  }
+              ],
+              "founder": {
+                  "@id": "https://luminelli.ch/#owner"
+              },
+              "knowsAbout": [
+                  "Massgeschneiderte Software",
+                  "Webtools",
+                  "Webapplikationen",
+                  "KI-gestützte Softwareentwicklung"
+              ],
+              "knowsLanguage": "de",
+              "contactPoint": {
+                  "@type": "ContactPoint",
+                  "contactType": "customer service",
+                  "email": "service@luminelli.ch",
+                  "telephone": "+41 76 757 60 52",
+                  "availableLanguage": "de"
+              },
+              "makesOffer": {
+                  "@type": "Offer",
+                  "itemOffered": {
+                      "@type": "Service",
+                      "name": "Massgeschneiderte Webtools",
+                      "serviceType": "Softwareentwicklung",
+                      "description": "Individuell entwickelte Webtools statt teurer Abos und starrer Standardlösungen, dank KI schneller und günstiger umgesetzt.",
+                      "audience": {
+                          "@type": "BusinessAudience",
+                          "audienceType": "KMU, Institutionen, Vereine und Selbständige"
+                      },
+                      "provider": {
+                          "@id": "https://luminelli.ch/#studio"
+                      }
+                  }
+              }
+          },
+          {
+              "@type": "Person",
+              "@id": "https://luminelli.ch/#owner",
+              "name": "Felix Weissheimer",
+              "jobTitle": "Inhaber",
+              "worksFor": {
+                  "@id": "https://luminelli.ch/#studio"
+              }
+          },
+          {
+              "@type": "WebSite",
+              "@id": "https://luminelli.ch/#website",
+              "url": "https://luminelli.ch/",
+              "name": "Studio Luminelli",
+              "inLanguage": "de-CH",
+              "publisher": {
+                  "@id": "https://luminelli.ch/#studio"
+              }
+          },
+          {
+              "@type": "WebPage",
+              "@id": "https://luminelli.ch/#webpage",
+              "url": "https://luminelli.ch/",
+              "name": "Massgeschneiderte Webtools für KMU | Studio Luminelli, Basel",
+              "description": "Studio Luminelli entwickelt in Basel massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige. Mit KI schneller und günstiger.",
+              "inLanguage": "de-CH",
+              "isPartOf": {
+                  "@id": "https://luminelli.ch/#website"
+              },
+              "about": {
+                  "@id": "https://luminelli.ch/#studio"
+              },
+              "primaryImageOfPage": "https://luminelli.ch/assets/img/og-image.jpg",
+              "dateModified": "2026-11-16"
+          },
+          {
+              "@type": "ItemList",
+              "@id": "https://luminelli.ch/#loesungen",
+              "name": "Lösungen",
+              "itemListElement": [
+                  {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Lösungen für KMU und Gewerbe",
+                      "url": "https://luminelli.ch/loesungen/kmu.html"
+                  },
+                  {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Lösungen für Gemeinden",
+                      "url": "https://luminelli.ch/loesungen/gemeinden.html"
+                  },
+                  {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": "Lösungen für Vereine und Verbände",
+                      "url": "https://luminelli.ch/loesungen/vereine.html"
+                  },
+                  {
+                      "@type": "ListItem",
+                      "position": 4,
+                      "name": "Lösungen für Institutionen",
+                      "url": "https://luminelli.ch/loesungen/institutionen.html"
+                  },
+                  {
+                      "@type": "ListItem",
+                      "position": 5,
+                      "name": "Lösungen für Selbständige und Kulturschaffende",
+                      "url": "https://luminelli.ch/loesungen/selbstaendige.html"
+                  },
+                  {
+                      "@type": "ListItem",
+                      "position": 6,
+                      "name": "Lösungen für Privatpersonen",
+                      "url": "https://luminelli.ch/loesungen/privatpersonen.html"
+                  }
+              ]
           }
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://luminelli.ch/#felix",
-        "name": "Felix Weissheimer",
-        "jobTitle": "Inhaber",
-        "worksFor": { "@id": "https://luminelli.ch/#studio" }
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://luminelli.ch/#website",
-        "url": "https://luminelli.ch/",
-        "name": "Studio Luminelli",
-        "inLanguage": "de-CH",
-        "publisher": { "@id": "https://luminelli.ch/#studio" }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://luminelli.ch/#webpage",
-        "url": "https://luminelli.ch/",
-        "name": "Massgeschneiderte Webtools für KMU | Studio Luminelli, Basel",
-        "description": "Studio Luminelli entwickelt in Basel massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige. Mit KI schneller und günstiger.",
-        "inLanguage": "de-CH",
-        "isPartOf": { "@id": "https://luminelli.ch/#website" },
-        "about": { "@id": "https://luminelli.ch/#studio" },
-        "primaryImageOfPage": "https://luminelli.ch/assets/img/og-image.jpg",
-        "dateModified": "2026-11-13"
-      }
-    ]
+      ]
   }
   </script>
 </head>
@@ -160,6 +233,30 @@
       </address>
       <p class="legal"><a href="impressum.html">Impressum &amp; Datenschutz</a></p>
     </footer>
+
+    <section class="solutions" id="loesungen" aria-labelledby="loesungen-titel">
+      <h2 id="loesungen-titel"><span>Lösungen</span></h2>
+      <ul class="tiles">
+        <li class="tile tile--kmu">
+          <a href="loesungen/kmu.html"><h3><span>Für KMU</span></h3><p>Ihre Kundschaft bucht online, Ihr Team erfasst vor Ort. Weniger Telefon, Zettel und Excel im Alltag.</p></a>
+        </li>
+        <li class="tile tile--gemeinden">
+          <a href="loesungen/gemeinden.html"><h3><span>Für Gemeinden</span></h3><p>Kleine Online-Dienste, die Ihre Verwaltung entlasten und der Bevölkerung den Weg an den Schalter ersparen.</p></a>
+        </li>
+        <li class="tile tile--vereine">
+          <a href="loesungen/vereine.html"><h3><span>Für Vereine</span></h3><p>Helferpläne, Anmeldungen und Reservationen, die sich fast von selbst organisieren. Das entlastet Vorstand und Freiwillige.</p></a>
+        </li>
+        <li class="tile tile--institutionen">
+          <a href="loesungen/institutionen.html"><h3><span>Für Institutionen</span></h3><p>Einsatzpläne, Kursanmeldungen und Statistik für Schulen, Beratungsstellen, Kirchgemeinden, Museen und Stiftungen.</p></a>
+        </li>
+        <li class="tile tile--selbstaendige">
+          <a href="loesungen/selbstaendige.html"><h3><span>Für Selbständige</span></h3><p>Schlanke Werkzeuge für Kulturschaffende und Freelancer, die zu Ihrer Arbeit und zu Ihrem Budget passen.</p></a>
+        </li>
+        <li class="tile tile--privatpersonen">
+          <a href="loesungen/privatpersonen.html"><h3><span>Für Privatpersonen</span></h3><p>Fest-Website, Waschplan oder Ferienhaus der Familie: Ordnung und Gemeinschaft rund um Familie, Haus und Hobby.</p></a>
+        </li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>

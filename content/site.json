@@ -1,0 +1,467 @@
+{
+    "facts": {
+        "name": "Studio Luminelli",
+        "alternate_name": "Luminelli",
+        "owner": "Felix Weissheimer",
+        "owner_role": "Inhaber",
+        "street": "Luftgässlein 3",
+        "postal_code": "4051",
+        "city": "Basel",
+        "region": "BS",
+        "country": "CH",
+        "country_name": "Schweiz",
+        "phone": "+41 76 757 60 52",
+        "email": "service@luminelli.ch",
+        "url": "https://luminelli.ch/",
+        "description": "Studio Luminelli ist ein Ein-Personen-Studio in Basel. Es entwickelt mit KI-gestützter Softwareentwicklung massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige, schneller und günstiger als Standardlösungen mit teuren Abos.",
+        "service_name": "Massgeschneiderte Webtools",
+        "service_type": "Softwareentwicklung",
+        "service_description": "Individuell entwickelte Webtools statt teurer Abos und starrer Standardlösungen, dank KI schneller und günstiger umgesetzt.",
+        "audience": "KMU, Institutionen, Vereine und Selbständige",
+        "knows_about": "Massgeschneiderte Software\nWebtools\nWebapplikationen\nKI-gestützte Softwareentwicklung",
+        "area_served": "Basel-Stadt\nBasel-Landschaft\nSchweiz",
+        "geo_region": "CH-BS",
+        "geo_placename": "Basel"
+    },
+    "home": {
+        "seo": {
+            "title": "Massgeschneiderte Webtools für KMU | Studio Luminelli, Basel",
+            "description": "Studio Luminelli entwickelt in Basel massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige. Mit KI schneller und günstiger.",
+            "og_title": "Studio Luminelli: Massgeschneiderte Webtools aus Basel",
+            "og_description": "Zahlen Sie für Software, die nicht zu Ihnen passt? Mit KI ist Softwareentwicklung heute deutlich schneller und günstiger. Massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige.",
+            "og_image_alt": "Studio Luminelli: Zahlen Sie für Software, die nicht zu Ihnen passt?"
+        },
+        "h1": "Zahlen Sie für **Software**, die nicht zu Ihnen passt? Oder fragen Sie sich, ob es nicht günstiger ginge?",
+        "paragraphs": [
+            "Teure Abos, starre Standardlösungen, hohe {IT-Rechnungen}: Das war lange der Preis für digitale Werkzeuge. **Mit KI ist Softwareentwicklung heute deutlich schneller und günstiger.** Im Mittelpunkt steht nicht mehr der Code oder das Budget, sondern Ihr Bedürfnis.",
+            "Ich setze seit drei Jahren massgeschneiderte **Webtools** für **KMU**, **Institutionen**, **Vereine** und **Selbständige**~um."
+        ],
+        "cta_text": "Gerne arbeite ich mit Ihnen persönlich an einer guten Lösung.",
+        "cta_link": "Fragen Sie mich unverbindlich an.",
+        "mail_subject": "Anfrage an Studio Luminelli",
+        "solutions_heading": "Lösungen",
+        "modified": "2026-11-16"
+    },
+    "solutions": [
+        {
+            "slug": "kmu",
+            "tile_title": "Für KMU",
+            "tile_text": "Ihre Kundschaft bucht online, Ihr Team erfasst vor Ort. Weniger Telefon, Zettel und Excel im Alltag.",
+            "tint": "#f3f8e2",
+            "title": "Lösungen für KMU und Gewerbe",
+            "seo_description": "Ihre Kundschaft bucht online, Ihr Team erfasst vor Ort. Weniger Telefon, Zettel und Excel im Alltag. Beispiele für massgeschneiderte Webtools von Studio Luminelli in Basel.",
+            "intro": "Viele Kundinnen und Kunden möchten online buchen, doch nur wenige Betriebe bieten es an. Intern kosten Zettel, Excel und Gruppenchats Zeit. Hier setzen kleine Werkzeuge an, die genau zu Ihrem Betrieb passen.",
+            "examples": [
+                {
+                    "title": "Buchungssystem",
+                    "text": "Ihre Kundschaft bucht freie Termine selbst, rund um die Uhr. Bestätigung und Erinnerung gehen automatisch per E-Mail raus, eine Absage ist mit einem Klick erledigt.",
+                    "today": "Das Telefon klingelt während der Arbeit, das Terminbuch liegt auf Papier.",
+                    "fits": "Coiffeur, Kosmetik, Velowerkstatt, Beratung"
+                },
+                {
+                    "title": "Preisrechner statt Rückruf",
+                    "text": "Interessierte stellen ihr Angebot online zusammen und sehen sofort einen Richtpreis. Bei Ihnen landet eine vollständige Anfrage statt eines verpassten Anrufs.",
+                    "today": "Rückrufe und unvollständige Anfragen.",
+                    "fits": "Schreinerei, Malerei, Umzug, Gartenbau, Reinigung"
+                },
+                {
+                    "title": "Rapport auf Smartphone",
+                    "text": "Stunden, Material und Fotos direkt vor Ort erfassen und vom Kunden unterschreiben lassen. Das Büro erhält ein fertiges PDF für die Rechnung.",
+                    "today": "Zettel im Auto, Abtippen im Büro.",
+                    "fits": "Handwerk, Haustechnik, Gartenbau"
+                },
+                {
+                    "title": "Einsatzplan (ohne Excel)",
+                    "text": "Wer arbeitet wann? Schichten planen, untereinander tauschen und bestätigen, auf jedem Gerät. Keine Versionen mehr, die herumgeschickt werden.",
+                    "today": "Excel-Versionen im Gruppenchat.",
+                    "fits": "Gastronomie, Detailhandel, Reinigung"
+                },
+                {
+                    "title": "Vorbestellung mit Abholtermin",
+                    "text": "Ihre Kundschaft bestellt online und wählt einen Abholtermin. Sie erhalten eine Tagesliste für die Produktion.",
+                    "today": "Telefon und Zettel an der Kasse.",
+                    "fits": "Bäckerei, Metzgerei, Hofladen"
+                },
+                {
+                    "title": "Gutscheine online anbieten",
+                    "text": "Gutscheine online verkaufen, mit QR-Code einlösen und den Restwert jederzeit im Blick behalten.",
+                    "today": "Papiergutscheine ohne Übersicht.",
+                    "fits": "Restaurant, Coiffeur, Wellness, Laden"
+                },
+                {
+                    "title": "Inventar und Geräteausleihe",
+                    "text": "QR-Etiketten auf Werkzeug und Geräten, Ausleihe und Rückgabe per Handy, Wartungstermine inklusive.",
+                    "today": "«Wer hat den Bohrhammer?»",
+                    "fits": "Bau, Werkstatt, Eventtechnik"
+                },
+                {
+                    "title": "Wartungserinnerung",
+                    "text": "Eine Kundenliste mit Fälligkeiten. Kundschaft und Team werden rechtzeitig erinnert.",
+                    "today": "Vergessene Serviceintervalle.",
+                    "fits": "Heizung, Lüftung, Brandschutz"
+                },
+                {
+                    "title": "Alle Anfragen an einem Ort",
+                    "text": "Anfragen aus E-Mail, Telefon und Social Media landen in einer Liste mit Status und Wiedervorlage.",
+                    "today": "Anfragen verstreut über mehrere Kanäle.",
+                    "fits": "Kleinbetriebe"
+                }
+            ],
+            "modified": "2026-11-16"
+        },
+        {
+            "slug": "gemeinden",
+            "tile_title": "Für Gemeinden",
+            "tile_text": "Kleine Online-Dienste, die Ihre Verwaltung entlasten und der Bevölkerung den Weg an den Schalter ersparen.",
+            "tint": "#eaebfb",
+            "title": "Lösungen für Gemeinden",
+            "seo_description": "Kleine Online-Dienste, die Ihre Verwaltung entlasten und der Bevölkerung den Weg an den Schalter ersparen. Beispiele für massgeschneiderte Webtools von Studio Luminelli in Basel.",
+            "intro": "Gemeinden bieten deutlich weniger Online-Dienste an als Kantone, oft fehlt schlicht das Personal. Kleine Webtools passen dort, wo heute PDF-Formulare, Telefon und Excel einen Teilprozess tragen.",
+            "examples": [
+                {
+                    "title": "Räume reservieren",
+                    "text": "Belegungsplan online, provisorische Reservation mit wenigen Klicks, Bestätigung und Rechnung automatisch. Für Mehrzweckhalle, Singsaal oder Gemeindesaal.",
+                    "today": "PDF-Gesuch und Absprache mit dem Hauswart.",
+                    "fits": "Liegenschaften, Schule"
+                },
+                {
+                    "title": "Mängel melden mit Foto",
+                    "text": "Schlagloch, defekte Lampe, wilde Deponie: Meldung mit Foto und Standort, Weiterleitung an den Werkhof, der Stand ist für die Meldenden sichtbar.",
+                    "today": "Anrufe und E-Mails ohne genauen Ort.",
+                    "fits": "Werkhof, Bauverwaltung"
+                },
+                {
+                    "title": "Termine am Schalter",
+                    "text": "Termin mit Anliegen online buchen, dazu eine Checkliste der mitzubringenden Unterlagen.",
+                    "today": "Wartezeiten am Schalter.",
+                    "fits": "Einwohnerdienste"
+                },
+                {
+                    "title": "Sperrgut und Abfallkalender",
+                    "text": "Abholung online anmelden, Sammeltermine als Erinnerung aufs Handy.",
+                    "today": "Gedruckter Kalender, telefonische Anmeldung.",
+                    "fits": "Werkhof, Entsorgung"
+                },
+                {
+                    "title": "Gesuche für Anlässe",
+                    "text": "Ein geführtes Formular statt eines mehrseitigen PDF. Das Gesuch geht automatisch an Polizei, Feuerwehr und Bauamt.",
+                    "today": "PDF, das per E-Mail weitergeleitet wird.",
+                    "fits": "Gemeindekanzlei"
+                },
+                {
+                    "title": "Tarifrechner Tagesstrukturen",
+                    "text": "Eltern berechnen ihren Beitrag selbst und melden ihr Kind gleich an.",
+                    "today": "Tariftabelle im PDF.",
+                    "fits": "Schulverwaltung"
+                },
+                {
+                    "title": "Wartelisten",
+                    "text": "Position einsehen, Bestätigung erhalten, jährliche Rückfrage automatisch.",
+                    "today": "Excel in der Verwaltung.",
+                    "fits": "Familiengärten, Bootsplätze, Parkkarten"
+                },
+                {
+                    "title": "Einsatzplan fürs Wahlbüro",
+                    "text": "Einsätze verteilen, bestätigen lassen und rechtzeitig erinnern.",
+                    "today": "Telefonrunde vor jedem Abstimmungssonntag.",
+                    "fits": "Gemeindekanzlei"
+                }
+            ],
+            "modified": "2026-11-16"
+        },
+        {
+            "slug": "vereine",
+            "tile_title": "Für Vereine",
+            "tile_text": "Helferpläne, Anmeldungen und Reservationen, die sich fast von selbst organisieren. Das entlastet Vorstand und Freiwillige.",
+            "tint": "#dcf9ec",
+            "title": "Lösungen für Vereine und Verbände",
+            "seo_description": "Helferpläne, Anmeldungen und Reservationen, die sich fast von selbst organisieren. Das entlastet Vorstand und Freiwillige. Beispiele für massgeschneiderte Webtools von Studio Luminelli in Basel.",
+            "intro": "In der Schweiz gibt es rund 100'000 Vereine, getragen von Freiwilligen. Ein Ehrenamt kostet schnell elf Stunden im Monat, und viel davon ist Administration. Jede Stunde, die ein Werkzeug spart, entlastet Ihre Leute.",
+            "examples": [
+                {
+                    "title": "Helferplan fürs Fest",
+                    "text": "Helferinnen und Helfer tragen sich selbst in Schichten ein und werden rechtzeitig erinnert. Sie sehen auf einen Blick, wo noch Leute fehlen.",
+                    "today": "Liste an der GV, Aufrufe im Gruppenchat.",
+                    "fits": "Dorffest, Grümpelturnier, Konzert"
+                },
+                {
+                    "title": "Anmeldung für Anlässe",
+                    "text": "Anmeldung mit Menüwahl, Teilnehmerliste und Namensschilder in einem Ablauf.",
+                    "today": "Talon und E-Mails.",
+                    "fits": "GV, Vereinsreise, Jubiläum"
+                },
+                {
+                    "title": "Platz- und Hallenreservation",
+                    "text": "Online-Belegung mit Ihren Regeln, etwa höchstens zwei Buchungen pro Woche, Gäste inklusive.",
+                    "today": "Tabelle an der Clubhaustür.",
+                    "fits": "Tennis, Badminton, Curling"
+                },
+                {
+                    "title": "Fahr- und Ämtliplan",
+                    "text": "Fahrdienste zu Auswärtsspielen, Kuchenbuffet und Trikotwäsche fair verteilen.",
+                    "today": "Elternchat.",
+                    "fits": "Juniorenabteilungen"
+                },
+                {
+                    "title": "Turnierplan mit Live-Resultaten",
+                    "text": "Spielplan erzeugen, Resultate per Handy erfassen, Rangliste live auf dem Bildschirm.",
+                    "today": "Flipchart.",
+                    "fits": "Grümpelturnier, Jassturnier"
+                },
+                {
+                    "title": "Probenplan und Absenzen",
+                    "text": "Probendaten, An- und Abmelden, Übersicht pro Stimme oder Register.",
+                    "today": "Rundmail.",
+                    "fits": "Chor, Musikverein, Theatergruppe"
+                },
+                {
+                    "title": "Spesen und Belege",
+                    "text": "Beleg fotografieren, Freigabe durch den Kassier, Export für die Buchhaltung.",
+                    "today": "Quittungen im Couvert.",
+                    "fits": "Kassierinnen und Kassiere"
+                },
+                {
+                    "title": "Mitglieder pflegen ihre Daten selbst",
+                    "text": "Mitglieder ändern Adresse und Kontaktdaten selbst, der Vorstand sieht immer den aktuellen Stand.",
+                    "today": "Adressänderungen per E-Mail an die Aktuarin.",
+                    "fits": "Alle Vereine"
+                }
+            ],
+            "modified": "2026-11-16"
+        },
+        {
+            "slug": "institutionen",
+            "tile_title": "Für Institutionen",
+            "tile_text": "Einsatzpläne, Kursanmeldungen und Statistik für Schulen, Beratungsstellen, Kirchgemeinden, Museen und Stiftungen.",
+            "tint": "#fbe7e7",
+            "title": "Lösungen für Institutionen",
+            "seo_description": "Einsatzpläne, Kursanmeldungen und Statistik für Schulen, Beratungsstellen, Kirchgemeinden, Museen und Stiftungen. Beispiele für massgeschneiderte Webtools von Studio Luminelli in Basel.",
+            "intro": "Soziale Einrichtungen, Schulen, Kirchgemeinden, Museen, Bibliotheken und Stiftungen arbeiten an ihrer Digitalisierung. Im Alltag laufen Anmeldungen trotzdem oft über PDF per E-Mail. Kleine Werkzeuge schliessen diese Lücken.",
+            "examples": [
+                {
+                    "title": "Einsatzplan für Team und Freiwillige",
+                    "text": "Dienste planen, tauschen und bestätigen, mit einer Übersicht pro Woche. Bei einer Basler Beratungsstelle bereits im Einsatz.",
+                    "today": "Excel und Telefonrunden.",
+                    "fits": "Beratungsstellen, Freiwilligenorganisationen"
+                },
+                {
+                    "title": "Ihre Zahlen auf einen Blick",
+                    "text": "Kontakte anonym nach Thema erfassen und als Statistik auswerten, bereit für Jahresbericht und Geldgeber.",
+                    "today": "Strichlisten.",
+                    "fits": "Beratungsstellen, Geschäftsstellen"
+                },
+                {
+                    "title": "Kursanmeldung mit Warteliste",
+                    "text": "Anmeldung, Warteliste rückt automatisch nach, Präsenz und Teilnahmebestätigung.",
+                    "today": "Telefon und Excel.",
+                    "fits": "Sprachkurse, Erwachsenenbildung, Musikschule"
+                },
+                {
+                    "title": "Mittagstisch an- und abmelden",
+                    "text": "Module wählen, kurzfristig abmelden, die Küche erhält eine Tagesliste.",
+                    "today": "PDF per E-Mail, Anrufe am Morgen.",
+                    "fits": "Schulen, Tagesstrukturen"
+                },
+                {
+                    "title": "Elterngespräche buchen",
+                    "text": "Lehrpersonen geben Zeitfenster frei, Eltern buchen selbst und werden erinnert.",
+                    "today": "Zettel im Elternbrief.",
+                    "fits": "Schulen, Kitas"
+                },
+                {
+                    "title": "Anfragen an die Kirchgemeinde",
+                    "text": "Anfrage für Taufe oder Hochzeit mit Wunschdatum, dazu die Belegung des Kirchgemeindehauses.",
+                    "today": "Telefon ans Sekretariat.",
+                    "fits": "Kirchgemeinden"
+                },
+                {
+                    "title": "Führungen und Gruppen",
+                    "text": "Datum, Gruppengrösse und Sprache wählen, Bestätigung und Rechnung folgen automatisch.",
+                    "today": "Hin und her per E-Mail.",
+                    "fits": "Museen, Betriebe mit Führungen"
+                },
+                {
+                    "title": "Angebotsverzeichnis",
+                    "text": "Fachstellen und Angebote durchsuchbar an einem Ort, mit Filter nach Region, Thema und Sprache.",
+                    "today": "Ordner, Lesezeichen, Wissen einzelner.",
+                    "fits": "Beratung, Triage, Sozialdienste"
+                }
+            ],
+            "modified": "2026-11-16"
+        },
+        {
+            "slug": "selbstaendige",
+            "tile_title": "Für Selbständige",
+            "tile_text": "Schlanke Werkzeuge für Kulturschaffende und Freelancer, die zu Ihrer Arbeit und zu Ihrem Budget passen.",
+            "tint": "#faf0d0",
+            "title": "Lösungen für Selbständige und Kulturschaffende",
+            "seo_description": "Schlanke Werkzeuge für Kulturschaffende und Freelancer, die zu Ihrer Arbeit und zu Ihrem Budget passen. Beispiele für massgeschneiderte Webtools von Studio Luminelli in Basel.",
+            "intro": "Kulturschaffende und Freelancer brauchen günstige, schlanke Werkzeuge. Gleichzeitig steigen die Anforderungen an Gesuche, Budgets und Honorare. Ein eigenes kleines Tool hält Ordnung, wo eine grosse Software zu viel wäre.",
+            "examples": [
+                {
+                    "title": "Werkverzeichnis und Portfolio",
+                    "text": "Werke mit Bild, Mass, Preis und Status erfassen, Ausstellungen dokumentieren und ausgewählte Arbeiten online zeigen, mit Anfrage direkt zum Werk.",
+                    "today": "Excel und verstreute Fotos.",
+                    "fits": "Bildende Kunst, Fotografie"
+                },
+                {
+                    "title": "Fördergesuche im Griff",
+                    "text": "Stiftungen, Fristen, Unterlagen und Zusagen an einem Ort, bereit für das nächste Gesuch.",
+                    "today": "Fristen im Kalender, Unterlagen verstreut.",
+                    "fits": "Freie Szene, Ensembles"
+                },
+                {
+                    "title": "Budget- und Honorarrechner",
+                    "text": "Projektbudget mit Honoraren nach den Empfehlungen der Berufsverbände, als Export fürs Gesuch.",
+                    "today": "Excel-Vorlage.",
+                    "fits": "Theater, Tanz, Musik, Literatur"
+                },
+                {
+                    "title": "Unterricht buchen",
+                    "text": "Lektionen online buchen, Zehnerabos verwalten, Absageregeln inklusive.",
+                    "today": "Notizbuch.",
+                    "fits": "Musik, Yoga, Malen"
+                },
+                {
+                    "title": "Offerten auf Knopfdruck",
+                    "text": "Leistungen auswählen, Offerte als PDF im eigenen Design.",
+                    "today": "Word-Vorlage.",
+                    "fits": "Grafik, Übersetzung, Fotografie"
+                },
+                {
+                    "title": "Booking-Anfrage",
+                    "text": "Formular mit Datum, Ort, Technik und Budget. Techrider und Pressetext liegen zum Herunterladen bereit.",
+                    "today": "Unvollständige E-Mails.",
+                    "fits": "Musik, Performance"
+                },
+                {
+                    "title": "Plätze für kleine Anlässe",
+                    "text": "Plätze reservieren, Warteliste, Liste für die Abendkasse.",
+                    "today": "E-Mails an die Künstlerin.",
+                    "fits": "Lesungen, Hauskonzerte, Ateliertage"
+                },
+                {
+                    "title": "Projektzeit erfassen",
+                    "text": "Zeit pro Projekt erfassen, als Übersicht und Grundlage für die Rechnung.",
+                    "today": "Schätzung im Nachhinein.",
+                    "fits": "Freelancer"
+                }
+            ],
+            "modified": "2026-11-16"
+        },
+        {
+            "slug": "privatpersonen",
+            "tile_title": "Für Privatpersonen",
+            "tile_text": "Fest-Website, Waschplan oder Ferienhaus der Familie: Ordnung und Gemeinschaft rund um Familie, Haus und Hobby.",
+            "tint": "#efe8fb",
+            "title": "Lösungen für Privatpersonen",
+            "seo_description": "Fest-Website, Waschplan oder Ferienhaus der Familie: Ordnung und Gemeinschaft rund um Familie, Haus und Hobby. Beispiele für massgeschneiderte Webtools von Studio Luminelli in Basel.",
+            "intro": "Bei Privatpersonen geht es seltener um Effizienz als um Ordnung und Gemeinschaft. Viele Abläufe rund um Familie, Haus und Hobby laufen noch auf Papier oder im Gruppenchat.",
+            "examples": [
+                {
+                    "title": "Ihr Fest, Ihre Website",
+                    "text": "Einladung, Anmeldung mit Menüwahl, Mitfahrbörse und Fotoalbum für Hochzeit, Jubiläum oder Klassentreffen.",
+                    "today": "E-Mails und Excel-Listen.",
+                    "fits": "Hochzeit, Jubiläum, Klassentreffen"
+                },
+                {
+                    "title": "Digitaler Waschplan",
+                    "text": "Zeitfenster reservieren, tauschen und erinnert werden.",
+                    "today": "Papierplan in der Waschküche.",
+                    "fits": "Kleine Mehrfamilienhäuser, Genossenschaften"
+                },
+                {
+                    "title": "Ferienhaus der Familie",
+                    "text": "Belegungskalender, Regeln, Kostenaufteilung und Putzliste an einem Ort.",
+                    "today": "Telefonate und Diskussionen um die Festtage.",
+                    "fits": "Familien, Erbengemeinschaften"
+                },
+                {
+                    "title": "Stockwerkeigentum",
+                    "text": "Dokumente, Traktanden, Pendenzen und Meldungen für alle Eigentümerinnen und Eigentümer.",
+                    "today": "Ordner bei einer Person.",
+                    "fits": "Kleine Gemeinschaften ohne Verwaltung"
+                },
+                {
+                    "title": "Wer möchte was?",
+                    "text": "Gegenstände mit Foto erfassen, Wünsche anmelden, fair zuteilen.",
+                    "today": "Listen per E-Mail.",
+                    "fits": "Haushaltsauflösung, Erbengemeinschaften"
+                },
+                {
+                    "title": "Familienchronik",
+                    "text": "Rezepte, Geschichten und Bilder sammeln, auch als Druckversion.",
+                    "today": "Zettel und Fotoschachteln.",
+                    "fits": "Familien"
+                },
+                {
+                    "title": "Sammlung katalogisieren",
+                    "text": "Objekte mit Foto, Wert und Herkunft erfassen und durchsuchen.",
+                    "today": "Notizbuch.",
+                    "fits": "Wein, Schallplatten, Briefmarken, Bücher"
+                },
+                {
+                    "title": "Ausleihbörse im Quartier",
+                    "text": "Werkzeug und Geräte teilen und reservieren.",
+                    "today": "Anschlagbrett.",
+                    "fits": "Quartiere, Siedlungen"
+                }
+            ],
+            "modified": "2026-11-16"
+        }
+    ],
+    "solution_page": {
+        "cta_text": "Ihr Ablauf ist nicht dabei? Das ist der Normalfall, jede Lösung wird für Sie gebaut.",
+        "cta_link": "Fragen Sie mich unverbindlich an.",
+        "more_heading": "Weitere Lösungen",
+        "today_label": "Heute oft:",
+        "fits_label": "Passt für:"
+    },
+    "imprint": {
+        "seo": {
+            "title": "Impressum und Datenschutz | Studio Luminelli",
+            "description": "Impressum und Datenschutzhinweise von Studio Luminelli, Felix Weissheimer, Luftgässlein 3, 4051 Basel."
+        },
+        "h1": "Impressum und Datenschutz",
+        "sections": [
+            {
+                "heading": "Verantwortlich für Personendaten",
+                "text": "Für die Bearbeitung von Personendaten auf dieser Website ist Felix Weissheimer verantwortlich, erreichbar unter der Adresse oben."
+            },
+            {
+                "heading": "Keine Cookies, kein Tracking",
+                "text": "Diese Website setzt keine Cookies, verwendet keine Analyse- oder Trackingdienste und lädt keine Inhalte von Drittanbietern. Schriften und Bilder liegen auf demselben Server wie die Website."
+            },
+            {
+                "heading": "Server-Logfiles",
+                "text": "Beim Aufruf der Website speichert der Webserver automatisch technische Angaben wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browsertyp. Sie dienen dem sicheren Betrieb der Website und werden nicht mit anderen Daten zusammengeführt."
+            },
+            {
+                "heading": "Kontakt per E-Mail oder Telefon",
+                "text": "Wenn Sie mich kontaktieren, bearbeite ich Ihre Angaben nur, um Ihre Anfrage zu beantworten. Ohne Ihre Zustimmung gebe ich sie nicht an Dritte weiter, ausser das Gesetz verlangt es."
+            },
+            {
+                "heading": "Ihre Rechte",
+                "text": "Sie können jederzeit Auskunft über Ihre bei mir gespeicherten Personendaten verlangen und deren Berichtigung oder Löschung beantragen. Schreiben Sie dazu an [E-Mail]."
+            }
+        ],
+        "stand": "Stand: November 2026",
+        "modified": "2026-11-11"
+    },
+    "notfound": {
+        "title": "Seite nicht gefunden | Studio Luminelli",
+        "h1": "Diese Seite gibt es nicht.",
+        "text": "Vielleicht hat sich die Adresse geändert. Alles Wichtige steht auf der Startseite.",
+        "link": "Zur Startseite"
+    },
+    "llms": {
+        "summary": "Studio Luminelli ist ein Ein-Personen-Studio in Basel (Schweiz). Inhaber Felix Weissheimer entwickelt mit Hilfe von KI massgeschneiderte Webtools für KMU, Institutionen, Vereine und Selbständige.",
+        "stand": "November 2026",
+        "offer": "Massgeschneiderte Webtools und Software statt teurer Abos, starrer Standardlösungen und hoher IT-Rechnungen.\nMit KI ist Softwareentwicklung heute deutlich schneller und günstiger. Im Mittelpunkt steht nicht der Code oder das Budget, sondern das Bedürfnis der Kundschaft.\nFelix Weissheimer setzt seit drei Jahren massgeschneiderte Webtools um.",
+        "audience": "KMU, Institutionen, Vereine und Selbständige. Schwerpunkt ist die Region Basel (Basel-Stadt, Basel-Landschaft), die Zusammenarbeit funktioniert auch remote in der ganzen Schweiz.",
+        "contact_note": "Anfragen sind unverbindlich, am einfachsten per E-Mail."
+    },
+    "settings": {
+        "asset_version": 9
+    }
+}
