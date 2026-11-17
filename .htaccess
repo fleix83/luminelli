@@ -1,19 +1,19 @@
 # Studio Luminelli: Apache configuration
 # Canonical origin: https://luminelli.ch (HTTPS, no www)
+#
+# This file sits in the root of httpdocs, which also hosts other apps in subfolders
+# (e.g. /einsatzplan/, /statistik/, /files/). Apache applies it to those folders too, so:
+# - only redirects and protections that are safe for every app are global;
+# - everything specific to this static site (index, charset, 404 page, caching, CSP and
+#   other security headers) applies only to the site's own paths: files in the root,
+#   /loesungen/ and /assets/. Locally the site lives under /luminelli/, hence the optional prefix.
 
 Options -Indexes
-DirectoryIndex index.html
-AddDefaultCharset utf-8
-AddType application/manifest+json .webmanifest
-AddType font/woff2 .woff2
-
-# Custom 404 (root-absolute: correct on the domain, not under http://localhost/luminelli/)
-ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # www -> non-www, http -> https (real domain only, not localhost)
+  # ---------- Global: canonical host and HTTPS (real domain only, not localhost)
   RewriteCond %{HTTP_HOST} ^www\.luminelli\.ch$ [NC]
   RewriteRule ^ https://luminelli.ch%{REQUEST_URI} [R=301,L]
 
@@ -22,63 +22,70 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
   RewriteRule ^ https://luminelli.ch%{REQUEST_URI} [R=301,L]
 
+  # ---------- Global: never serve hidden files (.git, .env, ...), except /.well-known/ (SSL certificates)
+  RewriteCond %{REQUEST_URI} !/\.well-known/
+  RewriteRule (^|/)\. - [R=404,L]
+
+  # ---------- Everything below is for this site only: stop here for other apps' folders
+  RewriteCond %{REQUEST_URI} !^/(luminelli/)?([^/]*|(loesungen|assets|admin|content|docs|_archiv)/.*)$
+  RewriteRule ^ - [L]
+
   # /index.html -> /
   RewriteCond %{HTTP_HOST} ^luminelli\.ch$ [NC]
-  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
-  RewriteRule ^(.*/)?index\.html$ /%1 [R=301,L,NE]
+  RewriteCond %{THE_REQUEST} \s/+(loesungen/)?index\.html[\s?] [NC]
+  RewriteRule ^(loesungen/)?index\.html$ https://luminelli.ch/%1 [R=301,L,NE]
 
   # Pages of the old one-pager: send visitors and search engines to the new ones
   RewriteCond %{HTTP_HOST} ^luminelli\.ch$ [NC]
-  RewriteRule ^datenschutz\.html$ /impressum.html [R=301,L]
+  RewriteRule ^datenschutz\.html$ https://luminelli.ch/impressum.html [R=301,L]
   RewriteCond %{HTTP_HOST} ^luminelli\.ch$ [NC]
-  RewriteRule ^(projektor|agb|auftragsverarbeitung)\.html$ / [R=301,L]
+  RewriteRule ^(projektor|agb|auftragsverarbeitung)\.html$ https://luminelli.ch/ [R=301,L]
 
-  # Never serve internal files and folders (404, don't reveal they exist)
-  RewriteRule (^|/)\. - [R=404,L]
+  # Internal files and folders of this site (404, don't reveal they exist)
   RewriteRule ^(_archiv|docs|admin|content)(/|$) - [R=404,L]
-  RewriteRule \.(md|log|sql|bak|ini|sh|lock)$ - [R=404,L]
+  RewriteRule ^[^/]*\.(md|log|sql|bak|ini|sh|lock|command)$ - [R=404,L]
 </IfModule>
 
-# Fallback if mod_rewrite is unavailable
-<FilesMatch "^(\.git.*|\.env.*|.*\.md|.*\.log)$">
+# Fallback if mod_rewrite is unavailable (global: safe for every app)
+<FilesMatch "^(\.git.*|\.env.*)$">
   Require all denied
 </FilesMatch>
 
-# ---------- Compression
-<IfModule mod_brotli.c>
-  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript text/javascript application/json application/ld+json application/manifest+json application/xml image/svg+xml
-</IfModule>
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript text/javascript application/json application/ld+json application/manifest+json application/xml image/svg+xml
-</IfModule>
+# ---------- This site only
+<If "%{REQUEST_URI} =~ m#^/(luminelli/)?([^/]*|(loesungen|assets)/.*)$#">
+  DirectoryIndex index.html
+  AddDefaultCharset utf-8
+  AddType application/manifest+json .webmanifest
+  AddType font/woff2 .woff2
 
-# ---------- Caching
-<IfModule mod_headers.c>
-  # HTML, txt, xml, manifest: always revalidate
-  <FilesMatch "\.(html|txt|xml|webmanifest)$">
-    Header set Cache-Control "no-cache"
-  </FilesMatch>
-  # CSS/JS are versioned via ?v=N, fonts never change: 1 year
-  <FilesMatch "\.(css|js|woff2)$">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </FilesMatch>
-  # Images may be replaced under the same name: 30 days
-  <FilesMatch "\.(jpe?g|png|svg|webp|avif|ico)$">
-    Header set Cache-Control "public, max-age=2592000"
-  </FilesMatch>
-</IfModule>
+  # Custom 404 (root-absolute: correct on the domain, not under http://localhost/luminelli/)
+  ErrorDocument 404 /404.html
 
-# ---------- Security headers
-# "Header set", not "Header always set": on the Plesk host (nginx in front of Apache)
-# the "always" variants did not reach the browser.
-# The page has no inline scripts or styles; JSON-LD is data and is not affected by script-src.
-<IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set X-Frame-Options "DENY"
-  Header set Cross-Origin-Opener-Policy "same-origin"
-  Header set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()"
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
-  Header set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
-  Header unset X-Powered-By
-</IfModule>
+  <IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript text/javascript application/json application/ld+json application/manifest+json application/xml image/svg+xml
+  </IfModule>
+  <IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript text/javascript application/json application/ld+json application/manifest+json application/xml image/svg+xml
+  </IfModule>
+
+  <IfModule mod_headers.c>
+    # Caching. HTML, txt, xml, manifest: always revalidate.
+    Header set Cache-Control "no-cache" "expr=%{REQUEST_URI} =~ m#(/|\.(html|txt|xml|webmanifest))$#"
+    # CSS/JS are versioned via ?v=N, fonts never change: 1 year
+    Header set Cache-Control "public, max-age=31536000, immutable" "expr=%{REQUEST_URI} =~ m#\.(css|js|woff2)$#"
+    # Images may be replaced under the same name: 30 days
+    Header set Cache-Control "public, max-age=2592000" "expr=%{REQUEST_URI} =~ m#\.(jpe?g|png|svg|webp|avif|ico)$#"
+
+    # Security headers. "Header set", not "Header always set": on the Plesk host (nginx in front
+    # of Apache) the "always" variants did not reach the browser.
+    # The pages have no inline scripts or styles; JSON-LD is data and is not affected by script-src.
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set X-Frame-Options "DENY"
+    Header set Cross-Origin-Opener-Policy "same-origin"
+    Header set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()"
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+    Header set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
+    Header unset X-Powered-By
+  </IfModule>
+</If>
