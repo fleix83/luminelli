@@ -40,7 +40,7 @@
         "cta_link": "Fragen Sie mich unverbindlich an.",
         "mail_subject": "Anfrage an Studio Luminelli",
         "solutions_heading": "Lösungen",
-        "modified": "2026-11-16"
+        "modified": "2026-11-18"
     },
     "solutions": [
         {
@@ -50,7 +50,7 @@
             "tint": "#f3f8e2",
             "title": "Lösungen für KMU und Gewerbe",
             "seo_description": "Ihre Kundschaft bucht online, Ihr Team erfasst vor Ort. Weniger Telefon, Zettel und Excel im Alltag. Beispiele für massgeschneiderte Webtools von Studio Luminelli in Basel.",
-            "intro": "Viele Kundinnen und Kunden möchten online buchen, doch nur wenige Betriebe bieten es an. Intern kosten Zettel, Excel und Gruppenchats Zeit. Hier setzen kleine Werkzeuge an, die genau zu Ihrem Betrieb passen.",
+            "intro": "Gerade für KMU ist die IT ein echter Kostentreiber. Auch kleinste Anpassungen am System gehen ins Geld. Die Implementierung neuer Features sowieso. Heute kann man sich aber getrost die Frage stellen: brauchen wir für dieses Tool wirklich einen ausgebildeten Spezialisten? Muss es die bewährte aber eigentlich zu teure Branchenlösung sein? Was haben wir noch für Optionen, um unser IT-Budget zu verschlanken und die Mitarbeiterzufriedenheit gleichzeitig zu erhöhen?",
             "examples": [
                 {
                     "title": "Buchungssystem",
@@ -107,7 +107,7 @@
                     "fits": "Kleinbetriebe"
                 }
             ],
-            "modified": "2026-11-16"
+            "modified": "2026-11-18"
         },
         {
             "slug": "gemeinden",
